@@ -2,6 +2,7 @@
 title: "Data Viz 1"
 description: |
   Explore different perspectives and approaches to design more truthful and enlightening data visualisation.
+  This is the very first assignment on data visuals and I hope to add my thought process here and learn from fellow students.
 author:
   - name: Amrita Mishra
     url: https://amritamishradatablog.netlify.app/

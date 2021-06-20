@@ -1,7 +1,7 @@
 ---
 title: "Data Viz Tutorial"
 description: |
-  Learning the techniues of Data Viz taught by our professor Dr. Kam Tin Siong.
+  Learning the techniues of Data Viz taught by our professor Dr. Kam Tin Sion, who is a professor at Singapore Management University (SMU)
 author:
   - name: Amrita Mishra
     url: https://amritamishradatablog.netlify.app/
