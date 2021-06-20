@@ -116,7 +116,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["dataviz2_files/anchor-4.2.2/anchor.min.js","dataviz2_files/bowser-1.9.3/bowser.min.js","dataviz2_files/distill-2.2.21/template.v2.js","dataviz2_files/header-attrs-2.9/header-attrs.js","dataviz2_files/jquery-1.11.3/jquery.min.js","dataviz2_files/popper-2.6.0/popper.min.js","dataviz2_files/tippy-6.2.7/tippy-bundle.umd.min.js","dataviz2_files/tippy-6.2.7/tippy-light-border.css","dataviz2_files/tippy-6.2.7/tippy.css","dataviz2_files/tippy-6.2.7/tippy.umd.min.js","dataviz2_files/webcomponents-2.0.0/webcomponents.js","IMG/img1.png","IMG/img10.png","IMG/img11.png","IMG/img12.png","IMG/img13.png","IMG/img14.png","IMG/img15.png","IMG/img16.png","IMG/img17.png","IMG/img2.png","IMG/img20.png","IMG/img21.png","IMG/img22.png","IMG/img23.png","IMG/img24.png","IMG/img25.png","IMG/img3.png","IMG/img4.png","IMG/img5.png","IMG/img6.png","IMG/img7.png","IMG/img8.png","IMG/img9.png"]}
+  {"type":"character","attributes":{},"value":["dataviz2_files/anchor-4.2.2/anchor.min.js","dataviz2_files/bowser-1.9.3/bowser.min.js","dataviz2_files/distill-2.2.21/template.v2.js","dataviz2_files/header-attrs-2.9/header-attrs.js","dataviz2_files/jquery-1.11.3/jquery.min.js","dataviz2_files/popper-2.6.0/popper.min.js","dataviz2_files/tippy-6.2.7/tippy-bundle.umd.min.js","dataviz2_files/tippy-6.2.7/tippy-light-border.css","dataviz2_files/tippy-6.2.7/tippy.css","dataviz2_files/tippy-6.2.7/tippy.umd.min.js","dataviz2_files/webcomponents-2.0.0/webcomponents.js","IMG/img1.png","IMG/img10.png","IMG/img11.png","IMG/img12.png","IMG/img13.png","IMG/img14.png","IMG/img15.png","IMG/img16.png","IMG/img17.png","IMG/img2.png","IMG/img20.png","IMG/img21.png","IMG/img22.png","IMG/img23.png","IMG/img24.png","IMG/img25.png","IMG/img26.png","IMG/img27.png","IMG/img28.png","IMG/img29.png","IMG/img3.png","IMG/img4.png","IMG/img5.png","IMG/img6.png","IMG/img7.png","IMG/img8.png","IMG/img9.png"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1495,25 +1495,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <li><p>The X-axis and Y-axis are misleading with no unit numbers or axis details mentioned. As a reader, I do not know whether the 80 means 80million, 80% or what attribute.</p></li>
 <li><p>The graph seems static and we do not know for which period was the graph made. Ideally, a graph should show the trend if it is supposed to reflect growth. If the graph is indicative of trade for a particular year, the year details should be mentioned clearly.</p></li>
 </ol>
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Aesthetics</strong></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">a) Color coding for Thailand and EU seem very similar, including the labeling and the bubble representation. The colours could be made different (if a colour is absolutely needed).</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">b) The United States label seems to point to some data in the graph but visualization is unclear. Similar issues exists for Malaysia</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">c) Bucketing / summing up the total trade value for both imports and exports does not represent the true trade affair of the country. It would be easier to show each country separately for a deep dive analysis of the import/export analysis. Alternatively, a trend line may be used to show the growth of trade (import/export) over the years to reflect the true nature of Singapore’s trade with its trading partners.</td>
-</tr>
-</tbody>
-</table>
+<p><strong>Aesthetics</strong></p>
+<ol type="a">
+<li><p>Color coding for Thailand and EU seem very similar, including the labeling and the bubble representation. The colours could be made different (if a colour is absolutely needed).</p></li>
+<li><p>The United States label seems to point to some data in the graph but visualization is unclear. Similar issues exists for Malaysia.</p></li>
+<li><p>Bucketing / summing up the total trade value for both imports and exports does not represent the true trade affair of the country. It would be easier to show each country separately for a deep dive analysis of the import/export analysis. Alternatively, a trend line may be used to show the growth of trade (import/export) over the years to reflect the true nature of Singapore’s trade with its trading partners.</p></li>
+</ol>
+<hr />
 <h3 id="with-reference-to-the-critics-above-suggest-alternative-graphical-presentation-to-improve-the-current-design.-sketch-out-the-proposed-design.-the-proposed-alternative-design-should-include-appropriate-interactive-techniques.-support-your-design-by-describing-the-advantages-or-which-part-of-the-issues-your-alternative-design-try-to-overcome.">2. With reference to the critics above, suggest alternative graphical presentation to improve the current design. Sketch out the proposed design. The proposed alternative design should include appropriate interactive techniques. Support your design by describing the advantages or which part of the issue(s) your alternative design try to overcome.</h3>
 <p>Intent of Data Visualization can be better visualized by plotting using line graphs with different color coding of Nations/Countries and Dollar Values for Imports and Exports separately for each country. Final representation must enable Business User to identify Dollar Values of Each Country/Nation for their Import Vs Export to determine the nett trade.</p>
 <h3 id="using-tableau-design-the-proposed-data-visualization.">3. Using Tableau, design the proposed data visualization.</h3>
@@ -1533,7 +1521,17 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>Our cleansing part is now done and we can use the worksheet tab to tabulate our interactive charts. For Data Visualisation, it is seldom possible to add all the information in a single chart especially when there are multiple variables, markets and 10 years worth of data to view.</p>
 <p>This is where an interactive charts become useful in providing us an overview and also a method to view singular data if we want.</p>
 <h4 id="tableau-preparation">Tableau Preparation</h4>
-<p><strong>Chart 1: Performance by Country</strong> Our 1st chart is to perform interactive chart by market for the 10years for import and export data. 1. We drag the countries attribute to “Filters” section. Ensure to select only the 10 required countries that we need. 2. We drag Year to Columns and Sum(Export) &amp; Sum(Import) to Rows. 3. Under the marks pane, we select the graph as line. 4. We drag the measure names to colour pane. 5. Check if both Export and Import panes are reflecting the above configuration. 6. We edit the countries’ filter by adding “Show Filter”. This will populate a chart on the right which allows us to click multiple values. We are only interested in seeing the deep dived data for a single market. Hence, we will change the show filter to a single radio button. 7. Our market wise interactive chart is ready to see how each of the market performed in the last 10 years.</p>
+<p><strong>Chart 1: Performance by Country</strong> Our 1st chart is to perform interactive chart by market for the 10years for import and export data.</p>
+<ol type="1">
+<li>We drag the countries attribute to “Filters” section. Ensure to select only the 10 required countries that we need.</li>
+<li>We drag Year to Columns and Sum(Export) &amp; Sum(Import) to Rows.</li>
+<li>Under the marks pane, we select the graph as line.</li>
+<li>We drag the measure names to colour pane.</li>
+<li>Check if both Export and Import panes are reflecting the above configuration.</li>
+<li>We need to synchronise the axis to reflect the correct data.</li>
+<li>We edit the countries’ filter by adding “Show Filter”. This will populate a chart on the right which allows us to click multiple values. We are only interested in seeing the deep dived data for a single market. Hence, we will change the show filter to a single radio button.</li>
+<li>Our market wise interactive chart is ready to see how each of the market performed in the last 10 years.</li>
+</ol>
 <p><img src="IMG/img20.png" /> <img src="IMG/img21.png" /> <img src="IMG/img22.png" /> <strong>Chart 2: Trade Gap by Year</strong> For the 2nd chart, we will check how the trade gap perform for each of the 10 markets by the years. Since we want to see all the 10 countries together, we will apply a year wise filter.</p>
 <ol type="1">
 <li>Drag the year attribute to filter pane. Ensure you select only 2011 Jan to 2020 Dec data.</li>
@@ -1546,8 +1544,32 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p><img src="IMG/img23.png" /></p>
 <p><img src="IMG/img24.png" /></p>
 <p><img src="IMG/img25.png" /></p>
+<p><strong>Chart 3: Trade Gap by Analysis - Single Dashboard</strong> A single dashboard view would certainly tell us how each country performed in relation to one another within the period of 10 years. It is indeed tough to consolidate a single view without compromising on the overall data analysis.</p>
+<ol type="1">
+<li>We will use the attribute calculated earlier - Trade Grap to perform the analysis here.</li>
+<li>Drag country and year to the filter pane. We need to use these 2 attributes to filter out information later.</li>
+<li>Drag the country and year to the column tab. Drag the Trade Gap to the row tab.</li>
+<li>Add the Trade Gap to the colour pane.</li>
+<li>Change the type of graph to Line graph.</li>
+<li>Use the show filter attribute for both country and year. Then select the single value radio button.</li>
+<li>Ensure the Trade Gap colour is dual solid colour - red and blue only with 0 as mid axis point.</li>
+<li>The toop tip is important to show the correct data as we hover the cursor to various points. Once the tooltip is activated, the trade gap value will be shown in the graph.</li>
+</ol>
+<p><img src="IMG/img26.png" /></p>
+<p><img src="IMG/img27.png" /></p>
+<p><img src="IMG/img28.png" /></p>
+<p><strong>Chart 4: Trade Summary by Country for 2011-2020</strong> Since our original chart was a bubble type, we wil try and recreate a similar chart making it neater and more interactive. The above charts are helpful to us in determining what comprises of the trade data in the last 10 years with different views.</p>
+<ol type="1">
+<li>Drag country and year to the filter pane. We need to use these 2 attributes to filter out information later.</li>
+<li>Drag the Sum(Export) to rows and sum(Import) to Columns of the graph builder.</li>
+<li>Use the Marks pane to add Trade Gap to Colour, Trade Gap again to Tooltip, Country to Size, Country again to Label.</li>
+<li>Use the show filter attribute to show the country and years on right side. For Countries, we will retain the multiple filter. For Years, we will retain the single value radio button. Thsi is because we want to see only 1 year at a time but for all / many countries together. This would look like a nice interactive scaatter plot.</li>
+<li>Using the edit colour function, we will change the colour to 2 solid tone with a mid value axis at 0.</li>
+<li>When you change the year, you would see the bubbles move. It would show on a particular year, what was the trade gap (surplus/deficit). Blue indicates surplus. Red indicates deficit.</li>
+</ol>
+<p><img src="IMG/img29.png" /></p>
 <h4 id="the-final-dashbaord">The Final Dashbaord</h4>
-<p>We have prepared an interactive dashboard that retains the original design and also clearly highlights the import/export data of the 10 markets by years 2011-2020. The dashboard is interactive with radio buttons which allow the user to deep dive to a particular year to see the data.</p>
+<p>We have prepared an interactive dashboard that retains the original design and also clearly highlights the import/export data of the 10 markets by years 2011-2020. The dashboard is interactive with radio buttons which allow the user to deep dive to a particular year to see the data. We drag the Chart 4 to our dashboard panel to prepare the interactive dashboard. This dashboard is saved in Tableau Public for data enthusiasts to view.</p>
 <p><img src="IMG/img17.png" /></p>
 <h3 id="describe-three-major-observations-revealed-by-the-data-visualisation-prepared.">5. Describe three major observations revealed by the data visualisation prepared.</h3>
 <p><strong>Taiwan</strong>: The import of Taiwan has been higher than exports consistently since 2011-2020. There was an import dip in the year 2016 but effective 2017, the import went up. It has the highest import in comparison to the remaining 9 markets.</p>
