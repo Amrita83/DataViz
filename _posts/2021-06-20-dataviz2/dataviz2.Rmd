@@ -68,7 +68,7 @@ Intent of Data Visualization can be better visualized by plotting using line gra
 
 ### 3. Using Tableau, design the proposed data visualization. 
 
-Please view the proposed data visualization in Tableau Public [**here**](https://public.tableau.com/app/profile/amrita.mishra/viz/Tableau_DataViz2/TradeGapDashboard)
+Please view the proposed data visualization in Tableau Public [**here**](https://public.tableau.com/app/profile/amrita.mishra/viz/Tableau_DataViz2/TradeDashboard)
 
 ### 4.Provide step-by-step description on how the data visualization was prepared.
 
