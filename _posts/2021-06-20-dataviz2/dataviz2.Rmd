@@ -1,7 +1,7 @@
 ---
 title: "DataViz2"
 description: |
-  A short description of the post.
+    The purpose of the makeover is to improve on the original visualisation. Focus on what works, what doesn’t work, why those things don’t work, and how we made it better.
 author:
   - name: Amrita Mishra
     url: https://amritamishradatablog.netlify.app/
