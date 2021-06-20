@@ -1,5 +1,5 @@
 ---
-title: "DataViz2"
+title: "Data Viz 2"
 description: |
     The purpose of the makeover is to improve on the original visualisation. Focus on what works, what doesn’t work, why those things don’t work, and how we made it better.
 author:
