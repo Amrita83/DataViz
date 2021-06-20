@@ -1,7 +1,7 @@
 ---
 title: "Data Viz 2"
 description: |
-    The purpose of the makeover is to improve on the original visualisation. Focus on what works, what doesn’t work, why those things don’t work, and how we made it better.
+    The purpose of the makeover is to improve on the original visualisation. Focus on what works, what doesn’t work, why those things don’t work, and how we made it better. Problem solving is key to Data Science.
 author:
   - name: Amrita Mishra
     url: https://amritamishradatablog.netlify.app/
@@ -78,7 +78,7 @@ Download the data from here [https://www.singstat.gov.sg/find-data/search-by-the
 
 The output consists of data across all countries for many years prior to 2021.
 
-![](IMG/img2.png)
+
 
 #### Data Cleansing:
 
@@ -87,6 +87,13 @@ Date - Month and year of data
 Import - Import Value of the country
 Export - Export value of the country
 Country - To which country the value belongs to
+
+
+#### The Final Dashbaord
+
+We have prepared an interactive dashboard that retains the original design and also clearly highlights the import/export data of the 10 markets by years 2011-2020. The dashboard is interactive with radio buttons which allow the user to deep dive to a particular year to see the data.
+
+![](IMG/img16.png)
 
 ### 5. Describe three major observations revealed by the data visualisation prepared.
 Observation 1
