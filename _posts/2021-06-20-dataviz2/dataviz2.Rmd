@@ -69,7 +69,7 @@ Intent of Data Visualization can be better visualized by plotting using line gra
 
 ### 3. Using Tableau, design the proposed data visualization. 
 
-Please view the proposed data visualization in Tableau Public [**here**]
+Please view the proposed data visualization in Tableau Public [**here**](https://public.tableau.com/app/profile/amrita.mishra/viz/Tableau_DataViz2/TradeGapDashboard)
 
 ### 4.Provide step-by-step description on how the data visualization was prepared.
 
@@ -78,25 +78,93 @@ Download the data from here [https://www.singstat.gov.sg/find-data/search-by-the
 
 The output consists of data across all countries for many years prior to 2021.
 
-
-
 #### Data Cleansing:
 
 Metadata Information:
 Date - Month and year of data
 Import - Import Value of the country
 Export - Export value of the country
-Country - To which country the value belongs to
+Country - To which market the value belongs to
+
+* Once the data is extracted, we will filter out the 10 markets' data along with the import/export values for 2011Jan -2020 Dec. 
+* This step can also be carried out in Tableau by importing the 2 excel tabs T1 and T2, joining them together. 
+* After which, a formula can be added to join the records from T1 = T2.
+* Once the records are joined, we review the data type and convert all the import and export values to "Numeric" and check on the "Month/Year" data type to Date format.
+
+Our cleansing part is now done and we can use the worksheet tab to tabulate our interactive charts. For Data Visualisation, it is seldom possible to add all the information in a single chart especially when there are multiple variables, markets and 10 years worth of data to view.
+
+This is where an interactive charts become useful in providing us an overview and also a method to view singular data if we want.
+
+#### Tableau Preparation
+
+**Chart 1: Performance by Country**
+Our 1st chart is to perform interactive chart by market for the 10years for import and export data.
+1. We drag the countries attribute to "Filters" section. Ensure to select only the 10 required countries that we need.
+2. We drag Year to Columns and Sum(Export) & Sum(Import) to Rows.
+3. Under the marks pane, we select the graph as line.
+4. We drag the measure names to colour pane.
+5. Check if both Export and Import panes are reflecting the above configuration.
+6. We edit the countries' filter by adding "Show Filter". This will populate a chart on the right which allows us to click multiple values. We are only interested in seeing the deep dived data for a single market. Hence, we will change the show filter to a single radio button.
+7. Our market wise interactive chart is ready to see how each of the market performed in the last 10 years.
+
+![](IMG/img20.png)
+![](IMG/img21.png)
+![](IMG/img22.png)
+**Chart 2: Trade Gap by Year**
+For the 2nd chart, we will check how the trade gap perform for each of the 10 markets by the years.
+Since we want to see all the 10 countries together, we will apply a year wise filter.
+
+1. Drag the year attribute to filter pane. Ensure you select only 2011 Jan to 2020 Dec data.
+2. We need to calculate Trade Gap which is the Sum(Export)-Sum(Import). We will use the formula under Analysis to create this new calculated attribute.
+3. Our target is to make a bubble chart to show all the markets by year. The bubbles will be coloured based on their deficit type. If export is > import, then trade deficit is positive and will be green. If trade deficit is negative, the colour will be red. It is worth knowing that the deficit with a market is from Singapore perspective only.It does not mean that the respective market has a trade deficit.
+4. We shall drag the Trade Gap attribute to Size, then again to colour. We shall add the Country to Details.
+5. Using the Filter attribute, we will "Show Filter" for the years. A multi select chart will open up. We will change it to single value radio button.
+6. Under the colours, we will edit the colours to reflect red and green and only 2 solid colours with mid-point being 0.
+
+![](IMG/img23.png)
+
+![](IMG/img24.png)
+
+![](IMG/img25.png)
+
+
 
 
 #### The Final Dashbaord
 
 We have prepared an interactive dashboard that retains the original design and also clearly highlights the import/export data of the 10 markets by years 2011-2020. The dashboard is interactive with radio buttons which allow the user to deep dive to a particular year to see the data.
 
-![](IMG/img16.png)
+![](IMG/img17.png)
 
 ### 5. Describe three major observations revealed by the data visualisation prepared.
-Observation 1
+
+**Taiwan**: The import of Taiwan has been higher than exports consistently since 2011-2020. There was an import dip in the year 2016 but effective 2017, the import went up. It has the highest import in comparison to the remaining 9 markets.
+
+![](IMG/img3.png)
+
+**Hong Kong**: In contrast, Hong Kong has the highest export values consistently since 2011-2020.The values once reached 65.7M in 2018 (the highest export values recorded when compared to other markets). It is interesting to note that COVID has no impact on trade for this market.
+
+![](IMG/img4.png)
+
+**Mainland China**: As per the original graph, it looks like Mainland China has the highest import and export values. While the absolute values of import and export is indeed the highest, the trade gap between export and import is not high for Mainland China.It is interesting to note that other countries like Indonesia and Malaysia have a higher or equal trade gap suggesting that Singapore probably imports more from Indonesia and Malaysia than exports to them. Whereas, Singapore's import/export values with China is on par. After 2019, the import values seem to decline possibly owing to COVID reasons
+
+![](IMG/img8.png)
+
+**United States**: It is interesting to see that United States does not have large import / export values or a large trade gap. However, since Covid started, Singapore exported a lot of goods out to the US. Since mid-2020, the export values have overtaken the import values.The trade gap has shrunk over the last 10years while the overall trade exports have grown.
+
+![](IMG/img12.png)
+
+**Malaysia**: Since the onset of COVID, trade with Malaysia has entered into a deficit. This is possible due to many household goods which are imported from Malaysia. There is constantly a rising demand of household goods in Singapore due to circuit breaker / restrictions of travelling out of the country. Demand of groceries and eatables have gone up.
+
+![](IMG/img9.png)
+
+**EU**: While EU is actually large and comprises of many countries, the trade with EU is the lowest, hovering around 30-60K ('000) only.This indicates that Singapore may have its own favourities for trading and mostly the neighbouring countries are prominent trading partners.
+
+![](IMG/img5.png)
+
+*Trading Partners*: In the last 10 years, Mainland China and Malaysia have remained as the top 2 trading partners of Singapore.
+
+
 
 
 

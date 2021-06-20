@@ -117,7 +117,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["dataviz2_files/anchor-4.2.2/anchor.min.js","dataviz2_files/bowser-1.9.3/bowser.min.js","dataviz2_files/distill-2.2.21/template.v2.js","dataviz2_files/header-attrs-2.9/header-attrs.js","dataviz2_files/jquery-1.11.3/jquery.min.js","dataviz2_files/popper-2.6.0/popper.min.js","dataviz2_files/tippy-6.2.7/tippy-bundle.umd.min.js","dataviz2_files/tippy-6.2.7/tippy-light-border.css","dataviz2_files/tippy-6.2.7/tippy.css","dataviz2_files/tippy-6.2.7/tippy.umd.min.js","dataviz2_files/webcomponents-2.0.0/webcomponents.js","IMG/img1.png","IMG/img10.png","IMG/img11.png","IMG/img12.png","IMG/img13.png","IMG/img14.png","IMG/img15.png","IMG/img16.png","IMG/img2.png","IMG/img3.png","IMG/img4.png","IMG/img5.png","IMG/img6.png","IMG/img7.png","IMG/img8.png","IMG/img9.png"]}
+  {"type":"character","attributes":{},"value":["dataviz2_files/anchor-4.2.2/anchor.min.js","dataviz2_files/bowser-1.9.3/bowser.min.js","dataviz2_files/distill-2.2.21/template.v2.js","dataviz2_files/header-attrs-2.9/header-attrs.js","dataviz2_files/jquery-1.11.3/jquery.min.js","dataviz2_files/popper-2.6.0/popper.min.js","dataviz2_files/tippy-6.2.7/tippy-bundle.umd.min.js","dataviz2_files/tippy-6.2.7/tippy-light-border.css","dataviz2_files/tippy-6.2.7/tippy.css","dataviz2_files/tippy-6.2.7/tippy.umd.min.js","dataviz2_files/webcomponents-2.0.0/webcomponents.js","IMG/img1.png","IMG/img10.png","IMG/img11.png","IMG/img12.png","IMG/img13.png","IMG/img14.png","IMG/img15.png","IMG/img16.png","IMG/img17.png","IMG/img2.png","IMG/img20.png","IMG/img21.png","IMG/img22.png","IMG/img23.png","IMG/img24.png","IMG/img25.png","IMG/img3.png","IMG/img4.png","IMG/img5.png","IMG/img6.png","IMG/img7.png","IMG/img8.png","IMG/img9.png"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2137,18 +2137,52 @@ document.addEventListener('DOMContentLoaded', function() {
 <h3 id="with-reference-to-the-critics-above-suggest-alternative-graphical-presentation-to-improve-the-current-design.-sketch-out-the-proposed-design.-the-proposed-alternative-design-should-include-appropriate-interactive-techniques.-support-your-design-by-describing-the-advantages-or-which-part-of-the-issues-your-alternative-design-try-to-overcome.">2. With reference to the critics above, suggest alternative graphical presentation to improve the current design. Sketch out the proposed design. The proposed alternative design should include appropriate interactive techniques. Support your design by describing the advantages or which part of the issue(s) your alternative design try to overcome.</h3>
 <p>Intent of Data Visualization can be better visualized by plotting using line graphs with different color coding of Nations/Countries and Dollar Values for Imports and Exports separately for each country. Final representation must enable Business User to identify Dollar Values of Each Country/Nation for their Import Vs Export to determine the nett trade.</p>
 <h3 id="using-tableau-design-the-proposed-data-visualization.">3. Using Tableau, design the proposed data visualization.</h3>
-<p>Please view the proposed data visualization in Tableau Public [<strong>here</strong>]</p>
+<p>Please view the proposed data visualization in Tableau Public <a href="https://public.tableau.com/app/profile/amrita.mishra/viz/Tableau_DataViz2/TradeGapDashboard"><strong>here</strong></a></p>
 <h3 id="provide-step-by-step-description-on-how-the-data-visualization-was-prepared.">4.Provide step-by-step description on how the data visualization was prepared.</h3>
 <h4 id="data-download">Data Download:</h4>
 <p>Download the data from here [<a href="https://www.singstat.gov.sg/find-data/search-by-theme/trade-and-investment/merchandise-trade/latest-data" class="uri">https://www.singstat.gov.sg/find-data/search-by-theme/trade-and-investment/merchandise-trade/latest-data</a>] under region/market section.</p>
 <p>The output consists of data across all countries for many years prior to 2021.</p>
 <h4 id="data-cleansing">Data Cleansing:</h4>
-<p>Metadata Information: Date - Month and year of data Import - Import Value of the country Export - Export value of the country Country - To which country the value belongs to</p>
+<p>Metadata Information: Date - Month and year of data Import - Import Value of the country Export - Export value of the country Country - To which market the value belongs to</p>
+<ul>
+<li>Once the data is extracted, we will filter out the 10 markets’ data along with the import/export values for 2011Jan -2020 Dec. </li>
+<li>This step can also be carried out in Tableau by importing the 2 excel tabs T1 and T2, joining them together.</li>
+<li>After which, a formula can be added to join the records from T1 = T2.</li>
+<li>Once the records are joined, we review the data type and convert all the import and export values to “Numeric” and check on the “Month/Year” data type to Date format.</li>
+</ul>
+<p>Our cleansing part is now done and we can use the worksheet tab to tabulate our interactive charts. For Data Visualisation, it is seldom possible to add all the information in a single chart especially when there are multiple variables, markets and 10 years worth of data to view.</p>
+<p>This is where an interactive charts become useful in providing us an overview and also a method to view singular data if we want.</p>
+<h4 id="tableau-preparation">Tableau Preparation</h4>
+<p><strong>Chart 1: Performance by Country</strong> Our 1st chart is to perform interactive chart by market for the 10years for import and export data. 1. We drag the countries attribute to “Filters” section. Ensure to select only the 10 required countries that we need. 2. We drag Year to Columns and Sum(Export) &amp; Sum(Import) to Rows. 3. Under the marks pane, we select the graph as line. 4. We drag the measure names to colour pane. 5. Check if both Export and Import panes are reflecting the above configuration. 6. We edit the countries’ filter by adding “Show Filter”. This will populate a chart on the right which allows us to click multiple values. We are only interested in seeing the deep dived data for a single market. Hence, we will change the show filter to a single radio button. 7. Our market wise interactive chart is ready to see how each of the market performed in the last 10 years.</p>
+<p><img src="IMG/img20.png" /> <img src="IMG/img21.png" /> <img src="IMG/img22.png" /> <strong>Chart 2: Trade Gap by Year</strong> For the 2nd chart, we will check how the trade gap perform for each of the 10 markets by the years. Since we want to see all the 10 countries together, we will apply a year wise filter.</p>
+<ol type="1">
+<li>Drag the year attribute to filter pane. Ensure you select only 2011 Jan to 2020 Dec data.</li>
+<li>We need to calculate Trade Gap which is the Sum(Export)-Sum(Import). We will use the formula under Analysis to create this new calculated attribute.</li>
+<li>Our target is to make a bubble chart to show all the markets by year. The bubbles will be coloured based on their deficit type. If export is &gt; import, then trade deficit is positive and will be green. If trade deficit is negative, the colour will be red. It is worth knowing that the deficit with a market is from Singapore perspective only.It does not mean that the respective market has a trade deficit.</li>
+<li>We shall drag the Trade Gap attribute to Size, then again to colour. We shall add the Country to Details.</li>
+<li>Using the Filter attribute, we will “Show Filter” for the years. A multi select chart will open up. We will change it to single value radio button.</li>
+<li>Under the colours, we will edit the colours to reflect red and green and only 2 solid colours with mid-point being 0.</li>
+</ol>
+<p><img src="IMG/img23.png" /></p>
+<p><img src="IMG/img24.png" /></p>
+<p><img src="IMG/img25.png" /></p>
 <h4 id="the-final-dashbaord">The Final Dashbaord</h4>
 <p>We have prepared an interactive dashboard that retains the original design and also clearly highlights the import/export data of the 10 markets by years 2011-2020. The dashboard is interactive with radio buttons which allow the user to deep dive to a particular year to see the data.</p>
-<p><img src="IMG/img16.png" /></p>
+<p><img src="IMG/img17.png" /></p>
 <h3 id="describe-three-major-observations-revealed-by-the-data-visualisation-prepared.">5. Describe three major observations revealed by the data visualisation prepared.</h3>
-<p>Observation 1</p>
+<p><strong>Taiwan</strong>: The import of Taiwan has been higher than exports consistently since 2011-2020. There was an import dip in the year 2016 but effective 2017, the import went up. It has the highest import in comparison to the remaining 9 markets.</p>
+<p><img src="IMG/img3.png" /></p>
+<p><strong>Hong Kong</strong>: In contrast, Hong Kong has the highest export values consistently since 2011-2020.The values once reached 65.7M in 2018 (the highest export values recorded when compared to other markets). It is interesting to note that COVID has no impact on trade for this market.</p>
+<p><img src="IMG/img4.png" /></p>
+<p><strong>Mainland China</strong>: As per the original graph, it looks like Mainland China has the highest import and export values. While the absolute values of import and export is indeed the highest, the trade gap between export and import is not high for Mainland China.It is interesting to note that other countries like Indonesia and Malaysia have a higher or equal trade gap suggesting that Singapore probably imports more from Indonesia and Malaysia than exports to them. Whereas, Singapore’s import/export values with China is on par. After 2019, the import values seem to decline possibly owing to COVID reasons</p>
+<p><img src="IMG/img8.png" /></p>
+<p><strong>United States</strong>: It is interesting to see that United States does not have large import / export values or a large trade gap. However, since Covid started, Singapore exported a lot of goods out to the US. Since mid-2020, the export values have overtaken the import values.The trade gap has shrunk over the last 10years while the overall trade exports have grown.</p>
+<p><img src="IMG/img12.png" /></p>
+<p><strong>Malaysia</strong>: Since the onset of COVID, trade with Malaysia has entered into a deficit. This is possible due to many household goods which are imported from Malaysia. There is constantly a rising demand of household goods in Singapore due to circuit breaker / restrictions of travelling out of the country. Demand of groceries and eatables have gone up.</p>
+<p><img src="IMG/img9.png" /></p>
+<p><strong>EU</strong>: While EU is actually large and comprises of many countries, the trade with EU is the lowest, hovering around 30-60K (’000) only.This indicates that Singapore may have its own favourities for trading and mostly the neighbouring countries are prominent trading partners.</p>
+<p><img src="IMG/img5.png" /></p>
+<p><em>Trading Partners</em>: In the last 10 years, Mainland China and Malaysia have remained as the top 2 trading partners of Singapore.</p>
 <p>Distill is a publication format for scientific and technical writing, native to the web.</p>
 <p>Learn more about using Distill at <a href="https://rstudio.github.io/distill" class="uri">https://rstudio.github.io/distill</a>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
