@@ -2,6 +2,7 @@
 title: "About Amrita's blog"
 description: |
   I am a passionate Data Enthusiast who loves solving data problems. I am not a pro yet but I am learning various techniques to make my overall learning journey memorable. This blog has a list of my data projects which I am happy to share with other data scientists. If you want to drop a comment, note, improvement ideas, please feel free to do so.
+
 ---
 
 ```{r setup, include=FALSE}
