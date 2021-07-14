@@ -1,5 +1,39 @@
 [
   {
+    "path": "posts/2021-07-12-mini-challenge/",
+    "title": "Mini Challenge 1",
+    "description": "In the roughly twenty years that Tethys-based GAStech has been operating a natural gas production site in the island country of Kronos, it has produced remarkable profits and developed strong relationships with the government of Kronos. However, GAStech has not been as successful in demonstrating environmental stewardship.\n\nIn January, 2014, the leaders of GAStech are celebrating their new-found fortune as a result of the initial public offering of their very successful company. In the midst of this celebration, several employees of GAStech go missing. An organization known as the Protectors of Kronos (POK) is suspected in the disappearances.\n\nIt is January 21, 2014, and as an expert in visual analytics, you have been tasked with helping people understand the complex relationships among people and organizations that may have contributed to these events.\n\n*Background*\nThis scenario and all the people, places, groups, technologies, contained therein are fictitious. Any resemblance to real people, places, groups, or technologies is purely coincidental.",
+    "author": [
+      {
+        "name": "Amrita Mishra",
+        "url": "https://amritamishradatablog.netlify.app/"
+      }
+    ],
+    "date": "2021-07-18",
+    "categories": [],
+    "contents": "\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2021-07-14T21:59:51+08:00",
+    "input_file": "mini-challenge.knit.md"
+  },
+  {
+    "path": "posts/2021-07-12-dataviz-makeover-3/",
+    "title": "DataViz 3",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Amrita Mishra",
+        "url": "https://amritamishradatablog.netlify.app/"
+      }
+    ],
+    "date": "2021-07-12",
+    "categories": [],
+    "contents": "\r\nDistill is a publication format for scientific and technical writing, native to the web.\r\nLearn more about using Distill at https://rstudio.github.io/distill.\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2021-07-12T21:33:54+08:00",
+    "input_file": "dataviz-makeover-3.knit.md"
+  },
+  {
     "path": "posts/2021-06-20-dataviz1/",
     "title": "Data Viz 1",
     "description": "Explore different perspectives and approaches to design more truthful and enlightening data visualisation.\nThis is the very first assignment on data visuals and I hope to add my thought process here and learn from fellow students.",

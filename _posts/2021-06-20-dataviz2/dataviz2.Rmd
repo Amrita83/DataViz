@@ -204,7 +204,7 @@ Due to COVID, many trading partners experienced uncertain times and hence possib
 Key Links
 
 Github: https://github.com/Amrita83
-Netlify:https://amritamishradatablog.netlify.app
+Netlify:https://amritamishradatablog.netlify.app/posts/2021-06-20-dataviz2/
 Tableau:https://public.tableau.com/app/profile/amrita.mishra/viz/Tableau_DataViz2/TradeDashboard
 
 
