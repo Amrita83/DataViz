@@ -83,21 +83,45 @@ loyalty_data <- read_csv("data/MC2/loyalty_data.csv")
 ```
 #Data Cleansing and Renaming
 
-#Create a boxplot to check for places with highest credit card spending.
+#Create a boxplot to check for places with highest credit card spending based on Cr Card Data.
 
 ```{r}
 ggplot(cc_data, aes(x=location, y=price))+
   geom_boxplot()+
   scale_y_log10()
 ```
-#Creating a Histogram to check which locations were visited most.
+#Create a barplot showing median cr card spending by location
 
 ```{r}
 ggplot(cc_data, aes(x=location, y=price))+
+  geom_col()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+#Creating a Boxplot to check which locations were visited most based on Loyalty Data.
+
+```{r}
+ggplot(loyalty_data, aes(x=location, y=price))+
   geom_boxplot()+
   scale_y_log10()
 ```
 
+#Creating a Boxplot to check which loyalty numbers had the highest spending.
+```{r}
+ggplot(loyalty_data, aes(x=loyaltynum, y=price))+
+  geom_boxplot()+
+  scale_y_log10()
+```
 
 ____________________________________________________________________________________________________________________
 ### 2. Add the vehicle data to your analysis of the credit and loyalty card data. How does your assessment of the anomalies in question 1 change based on this new data? What discrepancies between vehicle, credit, and loyalty card data do you find? Please limit your answer to 8 images and 500 words.
