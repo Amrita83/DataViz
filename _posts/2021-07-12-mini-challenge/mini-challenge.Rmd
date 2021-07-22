@@ -18,6 +18,9 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 ____________________________________________________________________________________________________________________
 ## Synopsis of the Problem:
+
+![](IMG/MC2.png)
+
 ### Many of the Abila, Kronos-based employees of GAStech have company cars which are approved for both personal and business use. Those who do not have company cars have the ability to check out company trucks for business use, but these trucks cannot be used for personal business.
    
 ### Employees with company cars are happy to have these vehicles, because the company cars are generally much higher quality than the cars they would be able to afford otherwise. However, GAStech does not trust their employees. Without the employees? knowledge, GAStech has installed geospatial tracking software in the company vehicles. The vehicles are tracked periodically as long as they are moving.
@@ -36,14 +39,15 @@ ________________________________________________________________________________
 ![](IMG/MC1.jpg)
 ____________________________________________________________________________________________________________________
 
-![](IMG/MC2.png)
 ```{r}
 packages = c('tidytext', 'widyr',
               'wordcloud', 'DT',
               'textplot','lubridate',
               'hms','tidyverse',
               'tidygraph','ggraph',
-              'igraph','ggiraph')
+              'igraph','ggiraph',
+              'raster', 'sf',
+              'tmap', 'clock')
 
 for(p in packages){
   if(!require(p, character.only = T)){
@@ -74,11 +78,24 @@ ________________________________________________________________________________
 ```{r}
 cc_data <- read_csv("data/MC2/cc_data.csv")
 ```
+```{r}
+loyalty_data <- read_csv("data/MC2/loyalty_data.csv")
+```
+gapminder_cc <- cc_data %>%
+  filter(year==2014)
+
+#Create a boxplot to check for places with highest credit card spending.
+
+
+
 ____________________________________________________________________________________________________________________
 ### 2. Add the vehicle data to your analysis of the credit and loyalty card data. How does your assessment of the anomalies in question 1 change based on this new data? What discrepancies between vehicle, credit, and loyalty card data do you find? Please limit your answer to 8 images and 500 words.
 
+```{r}
+car_data <- read_csv("data/MC2/car-assignments.csv")
+```
 
-____________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________
 ### 3. Can you infer the owners of each credit card and loyalty card? What is your evidence? Where are there uncertainties in your method? Where are there uncertainties in the data? Please limit your answer to 8 images and 500 words.
 
 
