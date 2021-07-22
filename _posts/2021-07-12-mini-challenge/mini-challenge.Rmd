@@ -1,4 +1,4 @@
---
+---
 title: "Mini Challenge 2 - The Visual Detective"
 description: |
     As a visual Detective, I plan to analyse the data provided for Mini-Challenge 2 and uncover some deep mysteries around the suspicious activity of the credit cards held by the GAStech employees. Join me in the hunt!
