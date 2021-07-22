@@ -81,11 +81,22 @@ cc_data <- read_csv("data/MC2/cc_data.csv")
 ```{r}
 loyalty_data <- read_csv("data/MC2/loyalty_data.csv")
 ```
-gapminder_cc <- cc_data %>%
-  filter(year==2014)
+#Data Cleansing and Renaming
 
 #Create a boxplot to check for places with highest credit card spending.
 
+```{r}
+ggplot(cc_data, aes(x=location, y=price))+
+  geom_boxplot()+
+  scale_y_log10()
+```
+#Creating a Histogram to check which locations were visited most.
+
+```{r}
+ggplot(cc_data, aes(x=location, y=price))+
+  geom_boxplot()+
+  scale_y_log10()
+```
 
 
 ____________________________________________________________________________________________________________________
