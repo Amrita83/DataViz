@@ -1,11 +1,11 @@
 ---
 title: "Data Viz 3"
 description: |
-  A short description of the post.
+  “the science of analytical reasoning facilitated by interactive visual interfaces” (Thomas and Cook, eds., 2005)
 author:
   - name: Amrita Mishra
     url: https://amritamishradatablog.netlify.app/
-date: 07-12-2021
+date: 07-24-2021
 output:
   distill::distill_article:
     self_contained: false
