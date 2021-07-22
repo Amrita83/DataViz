@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2021-07-12-dataviz-makeover-3/",
+    "title": "Data Viz 3",
+    "description": "“the science of analytical reasoning facilitated by interactive visual interfaces” (Thomas and Cook, eds., 2005)",
+    "author": [
+      {
+        "name": "Amrita Mishra",
+        "url": "https://amritamishradatablog.netlify.app/"
+      }
+    ],
+    "date": "2021-07-24",
+    "categories": [],
+    "contents": "\r\nThe Scene A data journalist is tasked to prepare two data visualisation to support the news write-up of the latest development in DKI Jakarta. Below are the two data visualisation prepared by the data journalist.\r\n\r\n\r\n#The Task#\r\n###1. Critic the data visualisation from both its clarity and aesthetics. At least three from each evaluation criterion\r\nClarity\r\nAesthetics\r\n###2. With reference to the critics above, suggest alternative graphical presentation to improve the current design. Sketch out the proposed design. The proposed alternative design should include interactive techniques. Support your design by describing the advantages or which part of the issue(s) your alternative design try to overcome.\r\n###3. Using Tableau, design the proposed data visualisation.\r\n###4. Provide step-by-step description on how the data visualisation was prepared.\r\n###5, Describe three major observations revealed by the data visualisation prepared.\r\nDistill is a publication format for scientific and technical writing, native to the web.\r\nLearn more about using Distill at https://rstudio.github.io/distill.\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2021-07-22T19:10:56+08:00",
+    "input_file": "dataviz-makeover-3.knit.md"
+  },
+  {
     "path": "posts/2021-07-12-mini-challenge/",
     "title": "Mini Challenge 1",
     "description": "In the roughly twenty years that Tethys-based GAStech has been operating a natural gas production site in the island country of Kronos, it has produced remarkable profits and developed strong relationships with the government of Kronos. However, GAStech has not been as successful in demonstrating environmental stewardship.\n\nIn January, 2014, the leaders of GAStech are celebrating their new-found fortune as a result of the initial public offering of their very successful company. In the midst of this celebration, several employees of GAStech go missing. An organization known as the Protectors of Kronos (POK) is suspected in the disappearances.\n\nIt is January 21, 2014, and as an expert in visual analytics, you have been tasked with helping people understand the complex relationships among people and organizations that may have contributed to these events.\n\n*Background*\nThis scenario and all the people, places, groups, technologies, contained therein are fictitious. Any resemblance to real people, places, groups, or technologies is purely coincidental.",
@@ -15,23 +32,6 @@
     "preview": {},
     "last_modified": "2021-07-14T21:59:51+08:00",
     "input_file": "mini-challenge.knit.md"
-  },
-  {
-    "path": "posts/2021-07-12-dataviz-makeover-3/",
-    "title": "DataViz 3",
-    "description": "A short description of the post.",
-    "author": [
-      {
-        "name": "Amrita Mishra",
-        "url": "https://amritamishradatablog.netlify.app/"
-      }
-    ],
-    "date": "2021-07-12",
-    "categories": [],
-    "contents": "\r\nDistill is a publication format for scientific and technical writing, native to the web.\r\nLearn more about using Distill at https://rstudio.github.io/distill.\r\n\r\n\r\n\r\n",
-    "preview": {},
-    "last_modified": "2021-07-12T21:33:54+08:00",
-    "input_file": "dataviz-makeover-3.knit.md"
   },
   {
     "path": "posts/2021-06-20-dataviz1/",
