@@ -117,7 +117,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["data/MC2/~$2_data_readme.docx","data/MC2/AnswerSheet/VAST Challenge 2021 MC2 Answer Sheet.htm","data/MC2/AnswerSheet/VAST Challenge 2021 MC2 Answer Sheet_files/colorschememapping.xml","data/MC2/AnswerSheet/VAST Challenge 2021 MC2 Answer Sheet_files/filelist.xml","data/MC2/AnswerSheet/VAST Challenge 2021 MC2 Answer Sheet_files/themedata.thmx","data/MC2/car-assignments.csv","data/MC2/cc_data.csv","data/MC2/Geospatial/Abila.dbf","data/MC2/Geospatial/Abila.kml","data/MC2/Geospatial/Abila.prj","data/MC2/Geospatial/Abila.sbn","data/MC2/Geospatial/Abila.sbx","data/MC2/Geospatial/Abila.shp","data/MC2/Geospatial/Abila.shx","data/MC2/Geospatial/Kronos Island.kmz","data/MC2/Geospatial/Kronos_Island.dbf","data/MC2/Geospatial/Kronos_Island.prj","data/MC2/Geospatial/Kronos_Island.sbn","data/MC2/Geospatial/Kronos_Island.sbx","data/MC2/Geospatial/Kronos_Island.shp","data/MC2/Geospatial/Kronos_Island.shx","data/MC2/gps.csv","data/MC2/loyalty_data.csv","data/MC2/MC2-tourist.jpg","data/MC2/MC2_data_readme.docx","IMG/MC1.jpg","IMG/MC2.png"]}
+  {"type":"character","attributes":{},"value":["data/MC2/~$2_data_readme.docx","data/MC2/AnswerSheet/VAST Challenge 2021 MC2 Answer Sheet.htm","data/MC2/AnswerSheet/VAST Challenge 2021 MC2 Answer Sheet_files/colorschememapping.xml","data/MC2/AnswerSheet/VAST Challenge 2021 MC2 Answer Sheet_files/filelist.xml","data/MC2/AnswerSheet/VAST Challenge 2021 MC2 Answer Sheet_files/themedata.thmx","data/MC2/car-assignments.csv","data/MC2/cc_data.csv","data/MC2/Geospatial/Abila.dbf","data/MC2/Geospatial/Abila.kml","data/MC2/Geospatial/Abila.prj","data/MC2/Geospatial/Abila.sbn","data/MC2/Geospatial/Abila.sbx","data/MC2/Geospatial/Abila.shp","data/MC2/Geospatial/Abila.shx","data/MC2/Geospatial/Kronos Island.kmz","data/MC2/Geospatial/Kronos_Island.dbf","data/MC2/Geospatial/Kronos_Island.prj","data/MC2/Geospatial/Kronos_Island.sbn","data/MC2/Geospatial/Kronos_Island.sbx","data/MC2/Geospatial/Kronos_Island.shp","data/MC2/Geospatial/Kronos_Island.shx","data/MC2/gps.csv","data/MC2/loyalty_data.csv","data/MC2/MC2-tourist.jpg","data/MC2/MC2_data_readme.docx","IMG/MC1.jpg","IMG/MC2.png","mini-challenge_files/anchor-4.2.2/anchor.min.js","mini-challenge_files/bowser-1.9.3/bowser.min.js","mini-challenge_files/distill-2.2.21/template.v2.js","mini-challenge_files/figure-html5/unnamed-chunk-6-1.png","mini-challenge_files/figure-html5/unnamed-chunk-7-1.png","mini-challenge_files/figure-html5/unnamed-chunk-8-1.png","mini-challenge_files/figure-html5/unnamed-chunk-9-1.png","mini-challenge_files/header-attrs-2.9/header-attrs.js","mini-challenge_files/jquery-1.11.3/jquery.min.js","mini-challenge_files/popper-2.6.0/popper.min.js","mini-challenge_files/tippy-6.2.7/tippy-bundle.umd.min.js","mini-challenge_files/tippy-6.2.7/tippy-light-border.css","mini-challenge_files/tippy-6.2.7/tippy.css","mini-challenge_files/tippy-6.2.7/tippy.umd.min.js","mini-challenge_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2127,8 +2127,23 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
-<p>gapminder_cc &lt;- cc_data %&gt;% filter(year==2014)</p>
-<p>#Create a boxplot to check for places with highest credit card spending.</p>
+<p>#Data Cleansing and Renaming</p>
+<p>#Create a boxplot to check for places with highest credit card spending based on Cr Card Data.</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="mini-challenge_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
+</div>
+<p>#Create a barplot showing median cr card spending by location</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="mini-challenge_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
+</div>
+<p>#Creating a Boxplot to check which locations were visited most based on Loyalty Data.</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="mini-challenge_files/figure-html5/unnamed-chunk-8-1.png" width="624" /></p>
+</div>
+#Creating a Boxplot to check which loyalty numbers had the highest spending.
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="mini-challenge_files/figure-html5/unnamed-chunk-9-1.png" width="624" /></p>
+</div>
 <hr />
 <h3 id="add-the-vehicle-data-to-your-analysis-of-the-credit-and-loyalty-card-data.-how-does-your-assessment-of-the-anomalies-in-question-1-change-based-on-this-new-data-what-discrepancies-between-vehicle-credit-and-loyalty-card-data-do-you-find-please-limit-your-answer-to-8-images-and-500-words.">2. Add the vehicle data to your analysis of the credit and loyalty card data. How does your assessment of the anomalies in question 1 change based on this new data? What discrepancies between vehicle, credit, and loyalty card data do you find? Please limit your answer to 8 images and 500 words.</h3>
 <div class="layout-chunk" data-layout="l-body">

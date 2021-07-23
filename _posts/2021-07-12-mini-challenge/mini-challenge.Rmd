@@ -73,7 +73,23 @@ read_folder <- function(infolder) {
 }
 ```
 ____________________________________________________________________________________________________________________
+### Packages Used:
+
+readr, readxl, ggplot2, dplyr, ggiraph,
+
+
+
+____________________________________________________________________________________________________________________
 ### 1. Using just the credit and loyalty card data, identify the most popular locations, and when they are popular. What anomalies do you see? What corrections would you recommend to correct these anomalies? Please limit your answer to 8 images and 300 words.
+
+
+Based on the visual plots created suing absolute count, we can check with locations had the highest numbers based of the loyalty and credit card data.
+Additionally, we can check which locations had the highest spending based on the boxplots created.
+Box-plots are a great way to identify the outliers (anomalies) which may indicate suspicious activities.
+Further investigation would be required once we identify these outliers.
+
+As an immediate step, we would import the cc_data and loyalty_data to our R Studio.
+The loyalty data has 1392 rows and cr_card data has 1490 rows. This suggests that a 1-1 mapping may not be available. We would need to join the data sets to identify the relationship.
 
 ```{r}
 cc_data <- read_csv("data/MC2/cc_data.csv")
@@ -81,7 +97,15 @@ cc_data <- read_csv("data/MC2/cc_data.csv")
 ```{r}
 loyalty_data <- read_csv("data/MC2/loyalty_data.csv")
 ```
-#Data Cleansing and Renaming
+```{r}
+loyalty_data %>%
+  count(location, sort = TRUE)
+```
+
+```{r}
+cc_data %>%
+  count(location, sort = TRUE)
+```
 
 #Create a boxplot to check for places with highest credit card spending based on Cr Card Data.
 
@@ -90,6 +114,26 @@ ggplot(cc_data, aes(x=location, y=price))+
   geom_boxplot()+
   scale_y_log10()
 ```
+```{r}
+d <- highlight_key(cc_data)
+p <- ggplot(d,
+            aes(location,
+                price)) +
+  geom_point(size=1) +
+  coord_cartesian(xlim=c(0,10),
+                  ylim=c(0,1000))
+
+gg <- highlight(ggplotly(p),
+                "plotly_selected")
+
+crosstalk::bscols(gg,
+                  DT::datatable(d),
+                  widths = 5)
+```
+
+
+
+
 #Create a barplot showing median cr card spending by location
 
 ```{r}
@@ -137,12 +181,91 @@ ________________________________________________________________________________
 ____________________________________________________________________________________________________________________
 ### 4. Given the data sources provided, identify potential informal or unofficial relationships among GASTech personnel. Provide evidence for these relationships. Please limit your response to 8 images and 500 words.
 
+```{r}
+words_by_cc <- cc_data %>%
+  count(price, location, sort = TRUE) %>%
+  ungroup()
+```
 
+```{r}
+wordcloud(words_by_cc$word,
+          words_by_cc$n,
+          max.words = 300)
+```
 ____________________________________________________________________________________________________________________
 ### 5. Do you see evidence of suspicious activity? Identify 1- 10 locations where you believe the suspicious activity is occurring, and why Please limit your response to 10 images and 500 words.
 
+```{r}
+bgmap <- raster("data/MC2/Geospatial/MC2-tourist.tif")
+bgmap
+```
+
+```{r}
+tmap_mode("plot")
+tm_shape(bgmap)+
+  tm_raster(bgmap,
+            legend.show = FALSE)
+```
+
+```{r}
+tm_shape(bgmap) +
+tm_rgb(bgmap, r = 1, g = 2, b = 3,
+        alpha = NA,
+        saturation = 1,
+        interpolate = TRUE,
+        max.value = 255)
+```
+
+```{r}
+Abila_st <- st_read(dsn = "data/MC2/Geospatial",
+                    layer = "Abila")
+```
+
+```{r}
+gps <- read_csv("data/MC2/gps.csv")
+glimpse(gps)
+```
+
+```{r}
+gps$Timestamp <- date_time_parse(gps$Timestamp,
+                zone = "",
+                format = "m%/%d/%Y %H:%M:%S")
+gps$id <- as_factor(gps$id)
+```
+
+```{r}
+gps1 <- gps %>%
+  filter(Timestamp < "2014-01-06 23:59:00")
+```
+
+```{r}
+gps_sf <- st_as_sf(gps,
+                    coords = c("long", "lat"),
+                        crs = 4326)
+```
+
+```{r}
+gps_path <- gps_sf %>%
+  group_by(id) %>%
+  summarize(m = mean(Timestamp),
+            do_union=FALSE) %>%
+  st_cast("LINESTRING")
+```
 
 
+```{r}
+gps_path_selected <- gps_path %>%
+  filter(id==1)
+tmap_mode("view")
+tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1, g = 2, b = 3,
+         alpha = NA,
+         saturation = 1,
+         interpolate = TRUE,
+         max.value = 255) +
+  tm_shape(gps_path_selected) + 
+  tm_lines()
+```
 ____________________________________________________________________________________________________________________
 ### 6. References and Accolades:
 1. http://www.vacommunity.org/tiki-download_wiki_attachment.php?attId=23: 
