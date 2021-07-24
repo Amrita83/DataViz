@@ -23,26 +23,40 @@ A data journalist is tasked to prepare two data visualisation to support the new
 
 ![](IMG/img2.jpg)
 
+#About the Data#
+There are 2 data sheets in the excel.Looking at the data sheet, we notice that the data sheet is labeled in Bahasa Indonesia. 
+- Tab 1 is a district wise data (nama_kota) which is bifurcated by village name (nama_kelurahan).
+- Tab 2 is aggregated district wise data. 
+- For easy reference and understanding, we will translate the key words into English (only for data which is available by each district).
+- There are columns with no data by district. We will not use these columns for our analysis.
+- There is an entry on Proces Update Data which does not sound like a city / district name. We will retain it in our analysis as we do not know what this means.
+
 #The Task#
 
 ###1. Critic the data visualisation from both its clarity and aesthetics. At least three from each evaluation criterion
 
 **Clarity**
+1) The chart is quite cluttered due to multiple districts shown. The entire data set is huge and hence a plot chart loses focus on what it is trying to show. It would be easier to use a plot chart to represent only the top 5 district and not the entire data set.
 
+2) The comparison of the data for dots which are closer to each other is difficult to compare and analyse.This is because they appear very close and hence, the difference is not easily visualized.
 
-
+3) The bar graph should be scaled to show the numbers starting from 1000 as the entire chart looks too big given the large values. That would easily showcase the differences in numbers. Considering that the total number of Cities are just 8, showing top 5 is of no use. It would be good to compare all 8 of them (including the proces update data).
 
 **Aesthetics**
+1) The plot chart can be changed to reflect a more interactive model - perhaps a bubble chart which would have the name added as a tooltip instead of the names hard-coded in the graph as above. This makes the graph look untidy with names not very easy to read.
 
+2) The plot chart can show the X-axis as the names vs Y-axis as the cumulative deaths in descending order to give a cleaner look. The label of the graph says top 5 district but the entire set of data is shown here. However, it would be ideal to compare the death numbers to positive cases to visualize the ratio. While the death number of Utara may be 1900, it would be good to know the total number of positive cases to compare if the rate itself is high.
 
-
-
+3) The bar chart can also have the X-axis as the names vs y-axis as the cumulative deaths for the top 5 districts.The cumulative number of deaths is an addition of the previous days, weeks, months counts. A vertical chart would be more appropriate in addressing the gravity of the situation.
 
 
 ###2. With reference to the critics above, suggest alternative graphical presentation to improve the current design. Sketch out the proposed design. The proposed alternative design should include interactive techniques. Support your design by describing the advantages or which part of the issue(s) your alternative design try to overcome.
 
+A stacked Bar chart would help if we need to consider the different types of Covid positive cases along with their treatment, isolation, healed, and death categories. Since we are only keen to explore the death data vs total positive cases for the districts, we will explore 2 types of charts - a stacked bar graph (showing positive cases vs death) and a line graph to show the total number of deaths. For the stacked bar graph, we will further use a % to calculate the death rate of the district.
 
+If a daily data was provided, we could have built a line chart by each district (interactive in nature) to show the progress on a daily basis. Since the data provided is a snapshot of 30th June, we will stick to the data.
 
+![](IMG/img3.jpg)
 
 ###3. Using Tableau, design the proposed data visualisation.
 
