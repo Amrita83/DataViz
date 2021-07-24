@@ -38,6 +38,7 @@ ________________________________________________________________________________
 
 ![](IMG/MC1.jpg)
 ____________________________________________________________________________________________________________________
+# Packages Installation and Data Import
 
 ```{r}
 packages = c('tidytext', 'widyr',
@@ -57,9 +58,20 @@ for(p in packages){
 }
 ```
 
+![](IMG/img.jpg)
+
+### Packages Used:
+
+readr, readxl, ggplot2, dplyr, ggiraph, plotly,
+
+
+### Importing Files & Reading Them:
+
 ```{r}
 ccard <- "data/MC2/"
 ```
+
+![](IMG/img1.jpg)
 
 ```{r}
 read_folder <- function(infolder) {
@@ -72,40 +84,54 @@ read_folder <- function(infolder) {
     unnest(text)
 }
 ```
-____________________________________________________________________________________________________________________
-### Packages Used:
 
-readr, readxl, ggplot2, dplyr, ggiraph
-
-
+![](IMG/img2.jpg)
 
 ____________________________________________________________________________________________________________________
 ### 1. Using just the credit and loyalty card data, identify the most popular locations, and when they are popular. What anomalies do you see? What corrections would you recommend to correct these anomalies? Please limit your answer to 8 images and 300 words.
 
 
-Based on the visual plots created suing absolute count, we can check with locations had the highest numbers based of the loyalty and credit card data.
+Based on the visual plots created using absolute count, we can check with locations had the highest numbers based of the loyalty and credit card data.
 Additionally, we can check which locations had the highest spending based on the boxplots created.
 Box-plots are a great way to identify the outliers (anomalies) which may indicate suspicious activities.
 Further investigation would be required once we identify these outliers.
 
 As an immediate step, we would import the cc_data and loyalty_data to our R Studio.
-The loyalty data has 1392 rows and cr_card data has 1490 rows. This suggests that a 1-1 mapping may not be available. We would need to join the data sets to identify the relationship.
+The loyalty data has 1392 rows and cr_card data has 1490 rows. This suggests that a 1-1 mapping may not be available. Irrespective, we can use the count function to count the popular destinations from the 2 data sets.
 
 ```{r}
 cc_data <- read_csv("data/MC2/cc_data.csv")
 ```
+![](IMG/img3.jpg)
+
 ```{r}
 loyalty_data <- read_csv("data/MC2/loyalty_data.csv")
 ```
+![](IMG/img4.jpg)
+....................................................................................................................
+
 ```{r}
 loyalty_data %>%
   count(location, sort = TRUE)
 ```
+![](IMG/img5.jpg)
+....................................................................................................................
 
 ```{r}
 cc_data %>%
   count(location, sort = TRUE)
 ```
+![](IMG/img6.jpg)
+
+*Analysis:*
+
+1) Based on the credit card transactions, Katerina Cafe, Hippokampos, Guy's Gyros and Brew've Been Served are popular locations which were frequented by the GASTECH employees.
+
+2) Based on the loyalty data, Katerina Cafe, Hippokampos, Guy's Gyros and Brew've Been Served are popular locations which were frequented by the GASTECH employees.
+
+The above 2 data sets coincide to reflect that the above ae the 4 popular destinations which are frequented by the GAStech employees.
+
+....................................................................................................................
 
 #Create a boxplot to check for places with highest credit card spending based on Cr Card Data.
 

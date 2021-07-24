@@ -43,6 +43,30 @@ There are 2 data sheets in the excel. Looking at the data sheet, we notice that 
 
 ____________________________________________________________________________________________________________________
 
+# Literature Review
+Literature review of current visualizations on COVID-19 deaths worldwide. There are many websites that show the incremental data on a daily basis. Most visualizations are line graphs (time series data) as they talk about the progress over a period of time. The next popular visualization is geo-spatial graph where the websites show graphic data by country on how severely it is hit by Covid.
+
+Additionally now, countries are actively reporting vaccine status by adding daily updates to fully vaccinated vs partially vaccinated counts. This is helping many countries plan their supplies and arrangements in the event of adverse effects of the virus.
+
+*Accolades*
+
+1) https://www.worldometers.info/coronavirus/
+2) https://www.moh.gov.sg/covid-19
+3) https://data.humdata.org/visualization/covid19-humanitarian-operations/?ga1&gclid=Cj0KCQjw9O6HBhCrARIsADx5qCQm7nerudHtAIdWvgDXFTjdn8g_0bng0u78_5eLdcnKd7PPVm7BEmMaAupiEALw_wcB\
+4) https://ourworldindata.org/covid-vaccinations
+
+We are reviewing DKI JAKARTA data only as of 30th June 2021. It is a snapshot data and has very limited information provided (by district level). 
+
+Adding some visualizations below that are popular methods of showcasing the current data and the trends. While the below are time series and geo-spatial data charts, they are most useful when describing visuals related to a pandemic. Since we do not have time or map data, we would rely on simple charts to showcase the effects of the virus in DKI JAKARTA.
+
+![](IMG/img21.jpg)
+![](IMG/img22.jpg)
+
+
+![](IMG/img23.jpg)
+
+____________________________________________________________________________________________________________________
+
 # The Task
 
 ## 1. Critic the data visualisation from both its clarity and aesthetics. At least three from each evaluation criterion
