@@ -80,7 +80,7 @@ ________________________________________________________________________________
 ____________________________________________________________________________________________________________________
 ## 2. With reference to the critics above, suggest alternative graphical presentation to improve the current design. Sketch out the proposed design. The proposed alternative design should include interactive techniques. Support your design by describing the advantages or which part of the issue(s) your alternative design try to overcome.
 
-A Bar chart would help if we need to consider the different types of Covid positive cases along with their treatment, isolation, healed, and death categories. Since we are only keen to explore the death data vs total positive cases for the districts, we will explore 2 types of charts - a bar graph (showing positive cases vs death) and a line graph to show the total number of deaths. For the stacked bar graph, we will further use a % to calculate the death rate of the district.
+A Bar chart would help if we need to consider the different types of Covid positive cases along with their treatment, isolation, healed, and death categories. Since we are only keen to explore the death data vs total positive cases for the districts, we will explore 2 types of charts - a bar graph (showing total death numbers by district) and an interactive bubble graph to show the death rate, recovery rate by district. For the bubble graph, we will further use a % to calculate the death rate and % of recovery in the district.
 
 If a daily data was provided, we could have built a line chart by each district (interactive in nature) to show the progress on a daily basis. Since the data provided is a snapshot of 30th June, we will stick to the data. And if a population data was provided, we would have calculated the rate of covid to check if the covid is widespread in a particular district.
 
@@ -91,7 +91,7 @@ The below is the proposed sketch of how I visualize the dashboard to look like.T
 ____________________________________________________________________________________________________________________
 ## 3. Using Tableau, design the proposed data visualisation.
 
-Please view the proposed data visualization in Tableau Public [**here**]()
+Please view the proposed data visualization in Tableau Public [**here**](https://public.tableau.com/app/profile/amrita.mishra/viz/DataViz3_16271429522780/Dashboard1?publish=yes)
 
 The final dashboard looks like below.
 ![](IMG/img20.jpg)
