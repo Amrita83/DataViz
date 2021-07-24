@@ -75,7 +75,7 @@ read_folder <- function(infolder) {
 ____________________________________________________________________________________________________________________
 ### Packages Used:
 
-readr, readxl, ggplot2, dplyr, ggiraph,
+readr, readxl, ggplot2, dplyr, ggiraph
 
 
 
@@ -114,25 +114,6 @@ ggplot(cc_data, aes(x=location, y=price))+
   geom_boxplot()+
   scale_y_log10()
 ```
-```{r}
-d <- highlight_key(cc_data)
-p <- ggplot(d,
-            aes(location,
-                price)) +
-  geom_point(size=1) +
-  coord_cartesian(xlim=c(0,10),
-                  ylim=c(0,1000))
-
-gg <- highlight(ggplotly(p),
-                "plotly_selected")
-
-crosstalk::bscols(gg,
-                  DT::datatable(d),
-                  widths = 5)
-```
-
-
-
 
 #Create a barplot showing median cr card spending by location
 
@@ -181,40 +162,9 @@ ________________________________________________________________________________
 ____________________________________________________________________________________________________________________
 ### 4. Given the data sources provided, identify potential informal or unofficial relationships among GASTech personnel. Provide evidence for these relationships. Please limit your response to 8 images and 500 words.
 
-```{r}
-words_by_cc <- cc_data %>%
-  count(price, location, sort = TRUE) %>%
-  ungroup()
-```
 
-```{r}
-wordcloud(words_by_cc$word,
-          words_by_cc$n,
-          max.words = 300)
-```
 ____________________________________________________________________________________________________________________
 ### 5. Do you see evidence of suspicious activity? Identify 1- 10 locations where you believe the suspicious activity is occurring, and why Please limit your response to 10 images and 500 words.
-
-```{r}
-bgmap <- raster("data/MC2/Geospatial/MC2-tourist.tif")
-bgmap
-```
-
-```{r}
-tmap_mode("plot")
-tm_shape(bgmap)+
-  tm_raster(bgmap,
-            legend.show = FALSE)
-```
-
-```{r}
-tm_shape(bgmap) +
-tm_rgb(bgmap, r = 1, g = 2, b = 3,
-        alpha = NA,
-        saturation = 1,
-        interpolate = TRUE,
-        max.value = 255)
-```
 
 ```{r}
 Abila_st <- st_read(dsn = "data/MC2/Geospatial",
@@ -224,47 +174,6 @@ Abila_st <- st_read(dsn = "data/MC2/Geospatial",
 ```{r}
 gps <- read_csv("data/MC2/gps.csv")
 glimpse(gps)
-```
-
-```{r}
-gps$Timestamp <- date_time_parse(gps$Timestamp,
-                zone = "",
-                format = "m%/%d/%Y %H:%M:%S")
-gps$id <- as_factor(gps$id)
-```
-
-```{r}
-gps1 <- gps %>%
-  filter(Timestamp < "2014-01-06 23:59:00")
-```
-
-```{r}
-gps_sf <- st_as_sf(gps,
-                    coords = c("long", "lat"),
-                        crs = 4326)
-```
-
-```{r}
-gps_path <- gps_sf %>%
-  group_by(id) %>%
-  summarize(m = mean(Timestamp),
-            do_union=FALSE) %>%
-  st_cast("LINESTRING")
-```
-
-
-```{r}
-gps_path_selected <- gps_path %>%
-  filter(id==1)
-tmap_mode("view")
-tm_shape(bgmap) +
-  tm_rgb(bgmap, r = 1, g = 2, b = 3,
-         alpha = NA,
-         saturation = 1,
-         interpolate = TRUE,
-         max.value = 255) +
-  tm_shape(gps_path_selected) + 
-  tm_lines()
 ```
 ____________________________________________________________________________________________________________________
 ### 6. References and Accolades:
