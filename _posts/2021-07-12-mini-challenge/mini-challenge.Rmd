@@ -192,7 +192,7 @@ We will create a heatmap to check on the timings where transaction was the highe
 
 ### 1.6 Heatmap Creation
 
-1. The below steps allow us to identify id the credit card transaction done was on a weekday or weekend.
+ 1. The below steps allow us to identify id the credit card transaction done was on a weekday or weekend.
 It is the first filter applied on our data based on the timestamp column. Thereafter, we are counting the transactions under each location to form a heatmap.
 
 WD = Weekday
@@ -212,6 +212,7 @@ heatmap_cc <- cc_data %>%
   group_by(location, daydate, time) %>%
   add_count(location, daydate, time, name = "count")
 ```
+
 
 ```{r echo=TRUE}
 heatmap_cc_weekday <- heatmap_cc %>%
@@ -291,78 +292,8 @@ C3 <- ggplot(count_heatmap_cc_weekday,
         plot.title = element_text(hjust = 0.5))
 ```
 
-
 ```{r echo=TRUE}
 WE <- length(unique(heatmap_cc_weekend$count))
-```
-
-```{r echo=TRUE}
-cc_colour_B <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(WE)
-```
-
-```{r echo=TRUE}
-A2 <- ggplot(heatmap_cc_weekend,
-       aes(location, time)) + 
-  geom_tile(aes(fill = factor(count))) + 
-  scale_fill_manual(values = C2,
-                    name = "Frequency") + 
-                    #breaks = levels(count)[seq(1, x, by = 5)]) +
-  labs(x = "Locations", y = "Time (Static)", title = "Number of CCard Transactions during Weekends") +
-  theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1),
-        axis.text.y = element_text(size = 7),
-        plot.title = element_text(hjust = 0.5))
-```
-
-```{r echo=TRUE}
-WE_A <- length(unique(count_heatmap_cc_weekend$count))
-```
-
-```{r echo=TRUE}
-cc_colours2a <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(WE_A)
-```
-
-```{r echo=TRUE}
-CC_WKND <- ggplot(count_heatmap_cc_weekend,
-       aes(location, time)) + 
-  geom_tile(aes(fill = factor(count))) + 
-  scale_fill_manual(values = cc_colours2a,
-                    name = "Frequency") + 
-                    #breaks = levels(count)[seq(1, x, by = 5)]) +
-  labs(x = "Locations", y = "Time (Static)", title = "Number of CCard Transactions during Weekends") +
-  theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1),
-        axis.text.y = element_text(size = 7),
-        plot.title = element_text(hjust = 0.5))
-```
-
-```{r echo=TRUE}
-heatmap_cc <- cc_data %>%
-  mutate(time60 = round_date(cc_data$timestamp, "60 minutes"),
-         daydate = weekdays(timestamp),
-         tempdate = timestamp + (8*60*60),
-         weekend = chron::is.weekend(tempdate),
-         time = format(time60, format = "%H:%M"),
-         date = format(timestamp, format = "%m/%d/%Y")) %>%
-  select(-c(tempdate)) %>%
-  group_by(location, date) %>%
-  add_count(location, date, name = "count")
-```
-
-```{r echo=TRUE}
-heatmap_cc_weekday <- heatmap_cc %>%
-  filter(weekend == FALSE)
-```
-
-```{r echo=TRUE}
-heatmap_cc_weekend <- heatmap_cc %>%
-  filter(weekend == TRUE)
-```
-
-```{r echo=TRUE}
-HeatMap_WD <- length(unique(heatmap_cc_weekday$count))
-```
-
-```{r echo=TRUE}
-cc_colours2 <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(HeatMap_WD)
 ```
 
 2) Using Loyalty Data - for both day and time.
@@ -391,13 +322,10 @@ heatmap_loyalty_weekend <- heatmap_loyalty %>%
 L1 <- length(unique(heatmap_loyalty_weekday$count))
 ```
 
-
-
 ____________________________________________________________________________________________________________________
 ### 2. Add the vehicle data to your analysis of the credit and loyalty card data. How does your assessment of the anomalies in question 1 change based on this new data? What discrepancies between vehicle, credit, and loyalty card data do you find? Please limit your answer to 8 images and 500 words.
 
 The Gps and Employee Car data is already added to our RStudio.
-
 
 
 ________________________________________________________________________________________________________________
@@ -406,6 +334,7 @@ ________________________________________________________________________________
 
 ____________________________________________________________________________________________________________________
 ### 4. Given the data sources provided, identify potential informal or unofficial relationships among GASTech personnel. Provide evidence for these relationships. Please limit your response to 8 images and 500 words.
+
 
 
 ____________________________________________________________________________________________________________________
@@ -421,22 +350,9 @@ gps <- read_csv("data/MC2/gps.csv")
 glimpse(gps)
 ```
 
-```{r echo=TRUE}
-tmap_mode("plot")
-tm_shape(bgmap)+
-  tm_raster(bgmap,
-            legend.show = FALSE)
-```
+![](IMG/img7.jpg)
 
-```{r echo=TRUE}
-tm_shape(bgmap) +
-tm_rgb(bgmap, r = 1, g = 2, b = 3,
-        alpha = NA,
-        saturation = 1,
-        interpolate = TRUE,
-        max.value = 255)
-```
-
+![](IMG/img8.jpg)
 
 ____________________________________________________________________________________________________________________
 ### 6. References and Accolades:
