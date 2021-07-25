@@ -110,7 +110,7 @@ If a daily data was provided, we could have built a line chart by each district 
 
 The below is the proposed sketch of how I visualize the dashboard to look like.This would show which districts have the high death toll. Then proceed to compare them further on the basis of recovery and death rate (in proportion to total covid cases) to determine the fatality rate in a district.
 
-![](IMG/img3.jpg)
+![](IMG/img3.jpeg)
 
 ____________________________________________________________________________________________________________________
 ## 3. Using Tableau, design the proposed data visualisation.
