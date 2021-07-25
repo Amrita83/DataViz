@@ -40,7 +40,7 @@ ________________________________________________________________________________
 ____________________________________________________________________________________________________________________
 # Packages Installation and Data Import
 
-```{r}
+```{r echo=TRUE}
 packages = c('tidytext', 'widyr',
               'wordcloud', 'DT',
               'textplot','lubridate',
@@ -48,7 +48,10 @@ packages = c('tidytext', 'widyr',
               'tidygraph','ggraph',
               'igraph','ggiraph',
               'raster', 'sf',
-              'tmap', 'clock')
+              'tmap', 'clock',
+              'plotly', 'ggplot2',
+              'readr', 'readxl',
+              'network')
 
 for(p in packages){
   if(!require(p, character.only = T)){
@@ -57,23 +60,19 @@ for(p in packages){
   library(p, character.only = T)
 }
 ```
+....................................................................................................................
+# Importing Files & Reading Them:
 
-![](IMG/img.jpg)
+As an immediate step, we would import the cc_data and loyalty_data to our R Studio.The loyalty data has 1392 rows and cr_card data has 1490 rows. This suggests that a 1-1 mapping may not be available. Irrespective, we can use the count function to count the popular destinations from the 2 data sets.
 
-### Packages Used:
-
-readr, readxl, ggplot2, dplyr, ggiraph, plotly,
-
-
-### Importing Files & Reading Them:
-
-```{r}
+```{r echo=TRUE}
 ccard <- "data/MC2/"
+cc_data <- read_csv("data/MC2/cc_data.csv")
+loyalty_data <- read_csv("data/MC2/loyalty_data.csv")
+car_data <- read_csv("data/MC2/car-assignments.csv")
 ```
 
-![](IMG/img1.jpg)
-
-```{r}
+```{r echo=TRUE}
 read_folder <- function(infolder) {
    tibble(file = dir(infolder,
                       full.names = TRUE)) %>%
@@ -85,101 +84,343 @@ read_folder <- function(infolder) {
 }
 ```
 
-![](IMG/img2.jpg)
+....................................................................................................................
+# Data Cleansing and Preparation:
+1) We have changed Katerina's Cafe to Katerina Cafe as there are formatting issues in reading the string values.
 
+```{r echo=TRUE}
+cc_data <- cc_data %>%
+  mutate(location = str_replace_all(location,
+                                    pattern = "Katerin.+",
+                                    replacement = "Katrina\x27s Caf\xe9"))
+```
+
+```{r echo=TRUE}
+loyalty_data <- loyalty_data %>%
+  mutate(location = str_replace_all(location,
+                                    pattern = "Katerin.+",
+                                    replacement = "Katrina\x27s Caf\xe9"))
+```
+
+....................................................................................................................
+
+2) Convert timestamp from character column into date & time format using the below code:
+
+```{r echo=TRUE}
+cc_data$timestamp <- date_time_parse(cc_data$timestamp,
+                                     zone = "",
+                                     format = "%m/%d/%Y %H:%M")
+```
+
+```{r echo=TRUE}
+loyalty_data$timestamp <- date_time_parse(loyalty_data$timestamp,
+                                     zone = "",
+                                     format = "%m/%d/%Y")
+```
+
+....................................................................................................................
+
+# The Visual Detective at Work:
 ____________________________________________________________________________________________________________________
-### 1. Using just the credit and loyalty card data, identify the most popular locations, and when they are popular. What anomalies do you see? What corrections would you recommend to correct these anomalies? Please limit your answer to 8 images and 300 words.
+## 1. Using just the credit and loyalty card data, identify the most popular locations, and when they are popular. What anomalies do you see? What corrections would you recommend to correct these anomalies? Please limit your answer to 8 images and 300 words.
 
+### 1.1 Popularity of the Locations.
 
-Based on the visual plots created using absolute count, we can check with locations had the highest numbers based of the loyalty and credit card data.
+On the visual plots created using absolute count, we can check with locations had the highest numbers based of the loyalty and credit card data.
 Additionally, we can check which locations had the highest spending based on the boxplots created.
 Box-plots are a great way to identify the outliers (anomalies) which may indicate suspicious activities.
 Further investigation would be required once we identify these outliers.
 
-As an immediate step, we would import the cc_data and loyalty_data to our R Studio.
-The loyalty data has 1392 rows and cr_card data has 1490 rows. This suggests that a 1-1 mapping may not be available. Irrespective, we can use the count function to count the popular destinations from the 2 data sets.
-
-```{r}
-cc_data <- read_csv("data/MC2/cc_data.csv")
-```
-![](IMG/img3.jpg)
-
-```{r}
-loyalty_data <- read_csv("data/MC2/loyalty_data.csv")
-```
-![](IMG/img4.jpg)
-....................................................................................................................
-
-```{r}
+```{r echo=TRUE}
 loyalty_data %>%
   count(location, sort = TRUE)
 ```
-![](IMG/img5.jpg)
 ....................................................................................................................
 
-```{r}
+```{r echo=TRUE}
 cc_data %>%
   count(location, sort = TRUE)
 ```
-![](IMG/img6.jpg)
-
+....................................................................................................................
 *Analysis:*
 
-1) Based on the credit card transactions, Katerina Cafe, Hippokampos, Guy's Gyros and Brew've Been Served are popular locations which were frequented by the GASTECH employees.
+1) Based on the credit card transactions, *Katerina Cafe, Hippokampos, Guy's Gyros and Brew've Been Served* are popular locations which were frequented by the GASTECH employees.
 
-2) Based on the loyalty data, Katerina Cafe, Hippokampos, Guy's Gyros and Brew've Been Served are popular locations which were frequented by the GASTECH employees.
-
-The above 2 data sets coincide to reflect that the above ae the 4 popular destinations which are frequented by the GAStech employees.
+2) Based on the loyalty data, *Katerina Cafe, Hippokampos, Guy's Gyros and Brew've Been Served* are popular locations which were frequented by the GASTECH employees.
 
 ....................................................................................................................
 
-#Create a boxplot to check for places with highest credit card spending based on Cr Card Data.
+### 1.2 Create a boxplot to check for places with highest credit card spending based on Cr Card Data.
 
-```{r}
+```{r echo=TRUE}
 ggplot(cc_data, aes(x=location, y=price))+
   geom_boxplot()+
   scale_y_log10()
 ```
 
-#Create a barplot showing median cr card spending by location
+### 1.3 Create a barplot showing cr card spending by location
 
-```{r}
-ggplot(cc_data, aes(x=location, y=price))+
+```{r echo=TRUE}
+ggplot(cc_data, aes(x=location, y=price, sort = TRUE))+
   geom_col()
 ```
 
+### 1.4 Creating a Boxplot to check which locations were visited most based on Loyalty Data.
 
-
-
-
-
-
-
-
-
-
-
-#Creating a Boxplot to check which locations were visited most based on Loyalty Data.
-
-```{r}
+```{r echo=TRUE}
 ggplot(loyalty_data, aes(x=location, y=price))+
   geom_boxplot()+
   scale_y_log10()
 ```
 
-#Creating a Boxplot to check which loyalty numbers had the highest spending.
-```{r}
+### 1.5 Creating a Boxplot to check which loyalty numbers had the highest spending.
+```{r echo=TRUE}
 ggplot(loyalty_data, aes(x=loyaltynum, y=price))+
   geom_boxplot()+
   scale_y_log10()
 ```
+The above 2 data sets coincide to reflect that the above ae the 4 popular destinations which are frequented by the GAStech employees. However, we are checking for anomalies in the data suggesting suspicious behavior.
+Since the employees were given a corporate credit card, it is expected for them to use it during the weekday and not weekends. We will deep dive further on the transaction patters for weekday and weekends to deduce the behavior further.
 
-____________________________________________________________________________________________________________________
-### 2. Add the vehicle data to your analysis of the credit and loyalty card data. How does your assessment of the anomalies in question 1 change based on this new data? What discrepancies between vehicle, credit, and loyalty card data do you find? Please limit your answer to 8 images and 500 words.
+We will create a heatmap to check on the timings where transaction was the highest. That would provide us with insight on the anomalies of the spending habits.
+
+### 1.6 Heatmap Creation
 
 ```{r}
-car_data <- read_csv("data/MC2/car-assignments.csv")
+heatmap_cc <- cc_data %>%
+  mutate(time60 = round_date(cc_data$timestamp, "60 minutes"),
+         daydate = weekdays(timestamp),
+         tempdate = timestamp + 8*60*60,
+         weekend = chron::is.weekend(tempdate),
+         time = format(time60, format = "%H:%M")) %>%
+  select(-c(tempdate)) %>%
+  group_by(location, daydate, time) %>%
+  add_count(location, daydate, time, name = "count")
 ```
+
+```{r}
+heatmap_cc_weekday <- heatmap_cc %>%
+  filter(weekend == FALSE)
+```
+
+```{r}
+pop_heatmap_cc_weekday <- heatmap_cc %>%
+  filter(location == "Abila Zacharo"|
+           location =="Brew've Been Served" |
+           location == "Gelatogalore" |
+           location == "Guy's Gyros" |
+           location == "Hallowed Grounds" |
+           location == "Hippokampos" |
+           location == "Katrina's Café" |
+           location =="Ouzeri Elian")
+```
+
+```{r}
+heatmap_cc_weekend <- heatmap_cc %>%
+  filter(weekend == TRUE)
+```
+
+```{r}
+pop_heatmap_cc_weekend <- heatmap_cc %>%
+  filter(location == "Kalami Kafenion"|
+           location == "Guy's Gyros" |
+           location == "Hippokampos" |
+           location == "Katrina's Café" |
+           location =="Ouzeri Elian")
+```
+
+```{r}
+x1 <- length(unique(heatmap_cc_weekday$count))
+```
+
+```{r}
+cc_colours1 <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(x1)
+```
+
+```{r}
+p1 <- ggplot(heatmap_cc_weekday,
+       aes(location, time)) + 
+  geom_tile(aes(fill = factor(count))) + 
+  scale_fill_manual(values = cc_colours1,
+                    name = "Frequency") +
+                    #breaks = levels(count)[seq(1, x, by = 5)]) +
+  labs(x = "Locations", y = "Time (Static)", title = "Number of CC Transactions during Weekdays") +
+  theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1),
+        axis.text.y = element_text(size = 7),
+        plot.title = element_text(hjust = 0.5))
+```
+
+```{r}
+x1a <- length(unique(pop_heatmap_cc_weekday$count))
+```
+
+```{r}
+cc_colours1a <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(x1a)
+```
+
+```{r}
+p1a <- ggplot(pop_heatmap_cc_weekday,
+       aes(location, time)) + 
+  geom_tile(aes(fill = factor(count))) + 
+  scale_fill_manual(values = cc_colours1a,
+                    name = "Frequency") +
+                    #breaks = levels(count)[seq(1, x, by = 5)]) +
+  labs(x = "Locations", y = "Time (Static)", title = "Number of CC Transactions during Weekdays") +
+  theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1),
+        axis.text.y = element_text(size = 7),
+        plot.title = element_text(hjust = 0.5))
+```
+
+#svl <- "CC Time Weekday Heatmap.png"
+#ggsave(svl)
+
+```{r}
+x2 <- length(unique(heatmap_cc_weekend$count))
+```
+
+```{r}
+cc_colours2 <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(x2)
+```
+
+
+p2 <- ggplot(heatmap_cc_weekend,
+       aes(location, time)) + 
+  geom_tile(aes(fill = factor(count))) + 
+  scale_fill_manual(values = cc_colours2,
+                    name = "Frequency") + 
+                    #breaks = levels(count)[seq(1, x, by = 5)]) +
+  labs(x = "Locations", y = "Time (Static)", title = "Number of CC Transactions during Weekends") +
+  theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1),
+        axis.text.y = element_text(size = 7),
+        plot.title = element_text(hjust = 0.5))
+
+x2a <- length(unique(pop_heatmap_cc_weekend$count))
+
+cc_colours2a <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(x2a)
+
+p2a <- ggplot(pop_heatmap_cc_weekend,
+       aes(location, time)) + 
+  geom_tile(aes(fill = factor(count))) + 
+  scale_fill_manual(values = cc_colours2a,
+                    name = "Frequency") + 
+                    #breaks = levels(count)[seq(1, x, by = 5)]) +
+  labs(x = "Locations", y = "Time (Static)", title = "Number of CC Transactions during Weekends") +
+  theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1),
+        axis.text.y = element_text(size = 7),
+        plot.title = element_text(hjust = 0.5))
+
+
+#svl <- "CC Time Weekend Heatmap.png"
+#ggsave(svl)
+
+###################################################################
+#By Date
+###################################################################
+
+heatmap_cc <- cc_data %>%
+  mutate(time60 = round_date(cc_data$timestamp, "60 minutes"),
+         daydate = weekdays(timestamp),
+         tempdate = timestamp + 8*60*60,
+         weekend = chron::is.weekend(tempdate),
+         time = format(time60, format = "%H:%M"),
+         date = format(timestamp, format = "%m/%d/%Y")) %>%
+  select(-c(tempdate)) %>%
+  group_by(location, date) %>%
+  add_count(location, date, name = "count")
+
+heatmap_cc_weekday <- heatmap_cc %>%
+  filter(weekend == FALSE)
+
+heatmap_cc_weekend <- heatmap_cc %>%
+  filter(weekend == TRUE)
+
+x1 <- length(unique(heatmap_cc_weekday$count))
+
+cc_colours1 <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(x1)
+
+p3 <- ggplot(heatmap_cc_weekday,
+       aes(location, date)) + 
+  geom_tile(aes(fill = factor(count))) + 
+  scale_fill_manual(values = cc_colours1,
+                    name = "Frequency") +
+                    #breaks = levels(count)[seq(1, x, by = 5)]) +
+  labs(x = "Locations", y = "Date", title = "Number of CC Transactions during Weekdays") +
+  theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1),
+        axis.text.y = element_text(size = 7),
+        plot.title = element_text(hjust = 0.5))
+
+#svl <- "CC Weekday Heatmap.png"
+#ggsave(svl)
+
+x2 <- length(unique(heatmap_cc_weekend$count))
+
+cc_colours2 <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(x2)
+
+p4 <- ggplot(heatmap_cc_weekend,
+       aes(location, date)) + 
+  geom_tile(aes(fill = factor(count))) + 
+  scale_fill_manual(values = cc_colours2,
+                    name = "Frequency") + 
+                    #breaks = levels(count)[seq(1, x, by = 5)]) +
+  labs(x = "Locations", y = "Date", title = "Number of CC Transactions during Weekends") +
+  theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1),
+        axis.text.y = element_text(size = 7),
+        plot.title = element_text(hjust = 0.5))
+
+#svl <- "CC Weekend Heatmap.png"
+#ggsave(svl)
+heatmap_loy <- loyalty_data %>%
+  mutate(daydate = weekdays(timestamp),
+         tempdate = timestamp + 8*60*60,
+         weekend = chron::is.weekend(tempdate),
+         date = format(timestamp, format = "%m/%d/%Y")) %>%
+  select(-c(tempdate)) %>%
+  group_by(location, date) %>%
+  add_count(location, date, name = "count")
+
+heatmap_loy_weekday <- heatmap_loy %>%
+  filter(weekend == FALSE)
+
+heatmap_loy_weekend <- heatmap_loy %>%
+  filter(weekend == TRUE)
+
+x1 <- length(unique(heatmap_loy_weekday$count))
+
+cc_colours1 <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(x1)
+
+p5 <- ggplot(heatmap_loy_weekday,
+       aes(location, date)) + 
+  geom_tile(aes(fill = factor(count))) + 
+  scale_fill_manual(values = cc_colours1,
+                    name = "Frequency") +
+                    #breaks = levels(count)[seq(1, x, by = 5)]) +
+  labs(x = "Locations", y = "Date", title = "Loyalty Card Transactions during Weekdays") +
+  theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1),
+        axis.text.y = element_text(size = 7),
+        plot.title = element_text(hjust = 0.5))
+
+#svl <- "Loyalty Weekday Heatmap.png"
+#ggsave(svl)
+
+x2 <- length(unique(heatmap_loy_weekend$count))
+
+cc_colours2 <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(x2)
+
+p6 <- ggplot(heatmap_loy_weekend,
+       aes(location, date)) + 
+  geom_tile(aes(fill = factor(count))) + 
+  scale_fill_manual(values = cc_colours2,
+                    name = "Frequency") + 
+                    #breaks = levels(count)[seq(1, x, by = 5)]) +
+  labs(x = "Locations", y = "Date", title = "Loyalty Card Transactions during Weekends") +
+  theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1),
+        axis.text.y = element_text(size = 7),
+        plot.title = element_text(hjust = 0.5))
+
+#svl <- "Loyalty Weekend Heatmap.png"
+#ggsave(svl)
+____________________________________________________________________________________________________________________
+### 2. Add the vehicle data to your analysis of the credit and loyalty card data. How does your assessment of the anomalies in question 1 change based on this new data? What discrepancies between vehicle, credit, and loyalty card data do you find? Please limit your answer to 8 images and 500 words.
 
 ________________________________________________________________________________________________________________
 ### 3. Can you infer the owners of each credit card and loyalty card? What is your evidence? Where are there uncertainties in your method? Where are there uncertainties in the data? Please limit your answer to 8 images and 500 words.
@@ -192,7 +433,7 @@ ________________________________________________________________________________
 ____________________________________________________________________________________________________________________
 ### 5. Do you see evidence of suspicious activity? Identify 1- 10 locations where you believe the suspicious activity is occurring, and why Please limit your response to 10 images and 500 words.
 
-```{r}
+```{r echo=TRUE}
 Abila_st <- st_read(dsn = "data/MC2/Geospatial",
                     layer = "Abila")
 ```
@@ -206,7 +447,12 @@ ________________________________________________________________________________
 1. http://www.vacommunity.org/tiki-download_wiki_attachment.php?attId=23: 
 One of the interesting observation found here is that the team spent nearly 100 hrs to work on the mini challenge for their respective project. This shows how code and labour intensive this assignment is.
 
-2. 
+2. https://stackoverflow.com:
+Stackoverflow provided me with lot of insights as to how to use some of the codes used in the analysis above.
+
+3. https://scholarworks.smith.edu/cgi/viewcontent.cgi?article=1088&context=csc_facpubs
+
+4. 
 
 
 
