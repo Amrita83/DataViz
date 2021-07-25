@@ -2133,7 +2133,8 @@ document.addEventListener('DOMContentLoaded', function() {
 </code></pre>
 </div>
 </div>
-<p>…………………………………………………………………………………………………….. # Importing Files &amp; Reading Them:</p>
+<p>…………………………………………………………………………………………………….</p>
+<h1 id="importing-files-reading-them">Importing Files &amp; Reading Them:</h1>
 <p>As an immediate step, we would import the cc_data and loyalty_data to our R Studio.The loyalty data has 1392 rows and cr_card data has 1490 rows. This suggests that a 1-1 mapping may not be available. Irrespective, we can use the count function to count the popular destinations from the 2 data sets.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -2158,7 +2159,11 @@ document.addEventListener('DOMContentLoaded', function() {
 </code></pre>
 </div>
 </div>
-<p>…………………………………………………………………………………………………….. # Data Cleansing and Preparation: 1) We have changed Katerina’s Cafe to Katerina Cafe as there are formatting issues in reading the string values.</p>
+<p>……………………………………………………………………………………………………..</p>
+<h1 id="data-cleansing-and-preparation">Data Cleansing and Preparation:</h1>
+<ol type="1">
+<li>We have changed Katerina’s Cafe to Katerina Cafe as there are formatting issues in reading the string values.</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>cc_data</span> <span class='op'>&lt;-</span> <span class='va'>cc_data</span> <span class='op'>%&gt;%</span>
@@ -2248,8 +2253,8 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 <p>…………………………………………………………………………………………………….. <em>Analysis:</em></p>
 <ol type="1">
-<li><p>Based on the credit card transactions, <em>Katerina Cafe, Hippokampos, Guy’s Gyros and Brew’ve Been Served</em> are popular locations which were frequented by the GASTECH employees.</p></li>
-<li><p>Based on the loyalty data, <em>Katerina Cafe, Hippokampos, Guy’s Gyros and Brew’ve Been Served</em> are popular locations which were frequented by the GASTECH employees.</p></li>
+<li><p>Based on the credit card transactions, <em>Katerina’s Cafe, Hippokampos, Guy’s Gyros and Brew’ve Been Served</em> are popular locations which were frequented by the GASTECH employees.</p></li>
+<li><p>Based on the loyalty data, <em>Katerina’s Cafe, Hippokampos, Guy’s Gyros and Brew’ve Been Served</em> are popular locations which were frequented by the GASTECH employees.</p></li>
 </ol>
 <p>……………………………………………………………………………………………………..</p>
 <h3 id="create-a-boxplot-to-check-for-places-with-highest-credit-card-spending-based-on-cr-card-data.">1.2 Create a boxplot to check for places with highest credit card spending based on Cr Card Data.</h3>
@@ -2294,15 +2299,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>The above 2 data sets coincide to reflect that the above ae the 4 popular destinations which are frequented by the GAStech employees. However, we are checking for anomalies in the data suggesting suspicious behavior. Since the employees were given a corporate credit card, it is expected for them to use it during the weekday and not weekends. We will deep dive further on the transaction patters for weekday and weekends to deduce the behavior further.</p>
 <p>We will create a heatmap to check on the timings where transaction was the highest. That would provide us with insight on the anomalies of the spending habits.</p>
 <h3 id="heatmap-creation">1.6 Heatmap Creation</h3>
-<div class="layout-chunk" data-layout="l-body">
-
-</div>
-<div class="layout-chunk" data-layout="l-body">
-
-</div>
-<div class="layout-chunk" data-layout="l-body">
-
-</div>
+<ol type="1">
+<li>The below steps allow us to identify id the credit card transaction done was on a weekday or weekend. It is the first filter applied on our data based on the timestamp column. Thereafter, we are counting the transactions under each location to form a heatmap.</li>
+</ol>
+<p>WD = Weekday WE = Weekend CC = Credit Card Loyalty = Loyalty Data</p>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
@@ -2334,34 +2334,83 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
-<p>p2 &lt;- ggplot(heatmap_cc_weekend, aes(location, time)) + geom_tile(aes(fill = factor(count))) + scale_fill_manual(values = cc_colours2, name = “Frequency”) + #breaks = levels(count)[seq(1, x, by = 5)]) + labs(x = “Locations”, y = “Time (Static)”, title = “Number of CC Transactions during Weekends”) + theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1), axis.text.y = element_text(size = 7), plot.title = element_text(hjust = 0.5))</p>
-<p>x2a &lt;- length(unique(pop_heatmap_cc_weekend$count))</p>
-<p>cc_colours2a &lt;- colorRampPalette(c(‘blue’, ‘green’, ‘yellow’, ‘red’))(x2a)</p>
-<p>p2a &lt;- ggplot(pop_heatmap_cc_weekend, aes(location, time)) + geom_tile(aes(fill = factor(count))) + scale_fill_manual(values = cc_colours2a, name = “Frequency”) + #breaks = levels(count)[seq(1, x, by = 5)]) + labs(x = “Locations”, y = “Time (Static)”, title = “Number of CC Transactions during Weekends”) + theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1), axis.text.y = element_text(size = 7), plot.title = element_text(hjust = 0.5))</p>
-<p>#svl &lt;- “CC Time Weekend Heatmap.png” #ggsave(svl)</p>
-<p class="heading" id="section"></p>
-<p>#By Date ###################################################################</p>
-<p>heatmap_cc &lt;- cc_data %&gt;% mutate(time60 = round_date(cc_data$timestamp, “60 minutes”), daydate = weekdays(timestamp), tempdate = timestamp + 8<em>60</em>60, weekend = chron::is.weekend(tempdate), time = format(time60, format = “%H:%M”), date = format(timestamp, format = “%m/%d/%Y”)) %&gt;% select(-c(tempdate)) %&gt;% group_by(location, date) %&gt;% add_count(location, date, name = “count”)</p>
-<p>heatmap_cc_weekday &lt;- heatmap_cc %&gt;% filter(weekend == FALSE)</p>
-<p>heatmap_cc_weekend &lt;- heatmap_cc %&gt;% filter(weekend == TRUE)</p>
-<p>x1 &lt;- length(unique(heatmap_cc_weekday$count))</p>
-<p>cc_colours1 &lt;- colorRampPalette(c(‘blue’, ‘green’, ‘yellow’, ‘red’))(x1)</p>
-<p>p3 &lt;- ggplot(heatmap_cc_weekday, aes(location, date)) + geom_tile(aes(fill = factor(count))) + scale_fill_manual(values = cc_colours1, name = “Frequency”) + #breaks = levels(count)[seq(1, x, by = 5)]) + labs(x = “Locations”, y = “Date”, title = “Number of CC Transactions during Weekdays”) + theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1), axis.text.y = element_text(size = 7), plot.title = element_text(hjust = 0.5))</p>
-<p>#svl &lt;- “CC Weekday Heatmap.png” #ggsave(svl)</p>
-<p>x2 &lt;- length(unique(heatmap_cc_weekend$count))</p>
-<p>cc_colours2 &lt;- colorRampPalette(c(‘blue’, ‘green’, ‘yellow’, ‘red’))(x2)</p>
-<p>p4 &lt;- ggplot(heatmap_cc_weekend, aes(location, date)) + geom_tile(aes(fill = factor(count))) + scale_fill_manual(values = cc_colours2, name = “Frequency”) + #breaks = levels(count)[seq(1, x, by = 5)]) + labs(x = “Locations”, y = “Date”, title = “Number of CC Transactions during Weekends”) + theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1), axis.text.y = element_text(size = 7), plot.title = element_text(hjust = 0.5))</p>
-<p>#svl &lt;- “CC Weekend Heatmap.png” #ggsave(svl) heatmap_loy &lt;- loyalty_data %&gt;% mutate(daydate = weekdays(timestamp), tempdate = timestamp + 8<em>60</em>60, weekend = chron::is.weekend(tempdate), date = format(timestamp, format = “%m/%d/%Y”)) %&gt;% select(-c(tempdate)) %&gt;% group_by(location, date) %&gt;% add_count(location, date, name = “count”)</p>
-<p>heatmap_loy_weekday &lt;- heatmap_loy %&gt;% filter(weekend == FALSE)</p>
-<p>heatmap_loy_weekend &lt;- heatmap_loy %&gt;% filter(weekend == TRUE)</p>
-<p>x1 &lt;- length(unique(heatmap_loy_weekday$count))</p>
-<p>cc_colours1 &lt;- colorRampPalette(c(‘blue’, ‘green’, ‘yellow’, ‘red’))(x1)</p>
-<p>p5 &lt;- ggplot(heatmap_loy_weekday, aes(location, date)) + geom_tile(aes(fill = factor(count))) + scale_fill_manual(values = cc_colours1, name = “Frequency”) + #breaks = levels(count)[seq(1, x, by = 5)]) + labs(x = “Locations”, y = “Date”, title = “Loyalty Card Transactions during Weekdays”) + theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1), axis.text.y = element_text(size = 7), plot.title = element_text(hjust = 0.5))</p>
-<p>#svl &lt;- “Loyalty Weekday Heatmap.png” #ggsave(svl)</p>
-<p>x2 &lt;- length(unique(heatmap_loy_weekend$count))</p>
-<p>cc_colours2 &lt;- colorRampPalette(c(‘blue’, ‘green’, ‘yellow’, ‘red’))(x2)</p>
-<p>p6 &lt;- ggplot(heatmap_loy_weekend, aes(location, date)) + geom_tile(aes(fill = factor(count))) + scale_fill_manual(values = cc_colours2, name = “Frequency”) + #breaks = levels(count)[seq(1, x, by = 5)]) + labs(x = “Locations”, y = “Date”, title = “Loyalty Card Transactions during Weekends”) + theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1), axis.text.y = element_text(size = 7), plot.title = element_text(hjust = 0.5))</p>
-<p>#svl &lt;- “Loyalty Weekend Heatmap.png” #ggsave(svl) ____________________________________________________________________________________________________________________ ### 2. Add the vehicle data to your analysis of the credit and loyalty card data. How does your assessment of the anomalies in question 1 change based on this new data? What discrepancies between vehicle, credit, and loyalty card data do you find? Please limit your answer to 8 images and 500 words.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<hr />
+<h3 id="add-the-vehicle-data-to-your-analysis-of-the-credit-and-loyalty-card-data.-how-does-your-assessment-of-the-anomalies-in-question-1-change-based-on-this-new-data-what-discrepancies-between-vehicle-credit-and-loyalty-card-data-do-you-find-please-limit-your-answer-to-8-images-and-500-words.">2. Add the vehicle data to your analysis of the credit and loyalty card data. How does your assessment of the anomalies in question 1 change based on this new data? What discrepancies between vehicle, credit, and loyalty card data do you find? Please limit your answer to 8 images and 500 words.</h3>
 <hr />
 <h3 id="can-you-infer-the-owners-of-each-credit-card-and-loyalty-card-what-is-your-evidence-where-are-there-uncertainties-in-your-method-where-are-there-uncertainties-in-the-data-please-limit-your-answer-to-8-images-and-500-words.">3. Can you infer the owners of each credit card and loyalty card? What is your evidence? Where are there uncertainties in your method? Where are there uncertainties in the data? Please limit your answer to 8 images and 500 words.</h3>
 <hr />

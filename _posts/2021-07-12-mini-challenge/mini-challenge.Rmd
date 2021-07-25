@@ -60,7 +60,8 @@ for(p in packages){
   library(p, character.only = T)
 }
 ```
-....................................................................................................................
+...................................................................................................................
+
 # Importing Files & Reading Them:
 
 As an immediate step, we would import the cc_data and loyalty_data to our R Studio.The loyalty data has 1392 rows and cr_card data has 1490 rows. This suggests that a 1-1 mapping may not be available. Irrespective, we can use the count function to count the popular destinations from the 2 data sets.
@@ -85,6 +86,8 @@ read_folder <- function(infolder) {
 ```
 
 ....................................................................................................................
+
+
 # Data Cleansing and Preparation:
 1) We have changed Katerina's Cafe to Katerina Cafe as there are formatting issues in reading the string values.
 
@@ -144,9 +147,9 @@ cc_data %>%
 ....................................................................................................................
 *Analysis:*
 
-1) Based on the credit card transactions, *Katerina Cafe, Hippokampos, Guy's Gyros and Brew've Been Served* are popular locations which were frequented by the GASTECH employees.
+1) Based on the credit card transactions, *Katerina's Cafe, Hippokampos, Guy's Gyros and Brew've Been Served* are popular locations which were frequented by the GASTECH employees.
 
-2) Based on the loyalty data, *Katerina Cafe, Hippokampos, Guy's Gyros and Brew've Been Served* are popular locations which were frequented by the GASTECH employees.
+2) Based on the loyalty data, *Katerina's Cafe, Hippokampos, Guy's Gyros and Brew've Been Served* are popular locations which were frequented by the GASTECH employees.
 
 ....................................................................................................................
 
@@ -186,7 +189,16 @@ We will create a heatmap to check on the timings where transaction was the highe
 
 ### 1.6 Heatmap Creation
 
-```{r}
+1. The below steps allow us to identify id the credit card transaction done was on a weekday or weekend.
+It is the first filter applied on our data based on the timestamp column. Thereafter, we are counting the transactions under each location to form a heatmap.
+
+WD = Weekday
+WE = Weekend
+CC = Credit Card
+Loyalty = Loyalty Data
+
+1) Using Credit Card Data - for both day and time.
+```{r echo=TRUE}
 heatmap_cc <- cc_data %>%
   mutate(time60 = round_date(cc_data$timestamp, "60 minutes"),
          daydate = weekdays(timestamp),
@@ -198,13 +210,13 @@ heatmap_cc <- cc_data %>%
   add_count(location, daydate, time, name = "count")
 ```
 
-```{r}
+```{r echo=TRUE}
 heatmap_cc_weekday <- heatmap_cc %>%
   filter(weekend == FALSE)
 ```
 
-```{r}
-pop_heatmap_cc_weekday <- heatmap_cc %>%
+```{r echo=TRUE}
+count_heatmap_cc_weekday <- heatmap_cc %>%
   filter(location == "Abila Zacharo"|
            location =="Brew've Been Served" |
            location == "Gelatogalore" |
@@ -212,164 +224,147 @@ pop_heatmap_cc_weekday <- heatmap_cc %>%
            location == "Hallowed Grounds" |
            location == "Hippokampos" |
            location == "Katrina's Café" |
+           location == "Kalami Kafenion" |
            location =="Ouzeri Elian")
 ```
 
-```{r}
+```{r echo=TRUE}
 heatmap_cc_weekend <- heatmap_cc %>%
   filter(weekend == TRUE)
 ```
 
-```{r}
-pop_heatmap_cc_weekend <- heatmap_cc %>%
+```{r echo=TRUE}
+count_heatmap_cc_weekend <- heatmap_cc %>%
   filter(location == "Kalami Kafenion"|
            location == "Guy's Gyros" |
            location == "Hippokampos" |
            location == "Katrina's Café" |
-           location =="Ouzeri Elian")
+           location == "Ouzeri Elian" |
+           location == "Abila Zacharo"|
+           location == "Brew've Been Served" |
+           location == "Gelatogalore" |
+           location == "Hallowed Grounds")
+```
+
+```{r echo=TRUE}
+WD <- length(unique(heatmap_cc_weekday$count))
+```
+
+```{r echo=TRUE}
+cc_colour_A <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(WD)
 ```
 
 ```{r}
-x1 <- length(unique(heatmap_cc_weekday$count))
-```
-
-```{r}
-cc_colours1 <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(x1)
-```
-
-```{r}
-p1 <- ggplot(heatmap_cc_weekday,
+C1 <- ggplot(heatmap_cc_weekday,
        aes(location, time)) + 
   geom_tile(aes(fill = factor(count))) + 
-  scale_fill_manual(values = cc_colours1,
+  scale_fill_manual(values = cc_colour_A,
                     name = "Frequency") +
                     #breaks = levels(count)[seq(1, x, by = 5)]) +
-  labs(x = "Locations", y = "Time (Static)", title = "Number of CC Transactions during Weekdays") +
+  labs(x = "Locations", y = "Time (Static)", title = "Number of CCard Transactions during Weekdays") +
   theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1),
         axis.text.y = element_text(size = 7),
         plot.title = element_text(hjust = 0.5))
 ```
 
 ```{r}
-x1a <- length(unique(pop_heatmap_cc_weekday$count))
+A1 <- length(unique(count_heatmap_cc_weekday$count))
 ```
 
 ```{r}
-cc_colours1a <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(x1a)
+C2 <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(A1)
 ```
 
 ```{r}
-p1a <- ggplot(pop_heatmap_cc_weekday,
+C3 <- ggplot(count_heatmap_cc_weekday,
        aes(location, time)) + 
   geom_tile(aes(fill = factor(count))) + 
-  scale_fill_manual(values = cc_colours1a,
+  scale_fill_manual(values = cc_colour_A,
                     name = "Frequency") +
                     #breaks = levels(count)[seq(1, x, by = 5)]) +
-  labs(x = "Locations", y = "Time (Static)", title = "Number of CC Transactions during Weekdays") +
+  labs(x = "Locations", y = "Time (Static)", title = "Number of CCard Transactions during Weekdays") +
   theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1),
         axis.text.y = element_text(size = 7),
         plot.title = element_text(hjust = 0.5))
 ```
 
-#svl <- "CC Time Weekday Heatmap.png"
-#ggsave(svl)
 
 ```{r}
-x2 <- length(unique(heatmap_cc_weekend$count))
+WE <- length(unique(heatmap_cc_weekend$count))
 ```
 
 ```{r}
-cc_colours2 <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(x2)
+cc_colour_B <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(WE)
 ```
 
-
-p2 <- ggplot(heatmap_cc_weekend,
+```{r}
+A2 <- ggplot(heatmap_cc_weekend,
        aes(location, time)) + 
   geom_tile(aes(fill = factor(count))) + 
-  scale_fill_manual(values = cc_colours2,
+  scale_fill_manual(values = C2,
                     name = "Frequency") + 
                     #breaks = levels(count)[seq(1, x, by = 5)]) +
-  labs(x = "Locations", y = "Time (Static)", title = "Number of CC Transactions during Weekends") +
+  labs(x = "Locations", y = "Time (Static)", title = "Number of CCard Transactions during Weekends") +
   theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1),
         axis.text.y = element_text(size = 7),
         plot.title = element_text(hjust = 0.5))
+```
 
-x2a <- length(unique(pop_heatmap_cc_weekend$count))
+```{r}
+WE_A <- length(unique(count_heatmap_cc_weekend$count))
+```
 
-cc_colours2a <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(x2a)
+```{r}
+cc_colours2a <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(WE_A)
+```
 
-p2a <- ggplot(pop_heatmap_cc_weekend,
+```{r}
+CC_WKND <- ggplot(count_heatmap_cc_weekend,
        aes(location, time)) + 
   geom_tile(aes(fill = factor(count))) + 
   scale_fill_manual(values = cc_colours2a,
                     name = "Frequency") + 
                     #breaks = levels(count)[seq(1, x, by = 5)]) +
-  labs(x = "Locations", y = "Time (Static)", title = "Number of CC Transactions during Weekends") +
+  labs(x = "Locations", y = "Time (Static)", title = "Number of CCard Transactions during Weekends") +
   theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1),
         axis.text.y = element_text(size = 7),
         plot.title = element_text(hjust = 0.5))
+```
 
-
-#svl <- "CC Time Weekend Heatmap.png"
-#ggsave(svl)
-
-###################################################################
-#By Date
-###################################################################
-
+```{r}
 heatmap_cc <- cc_data %>%
   mutate(time60 = round_date(cc_data$timestamp, "60 minutes"),
          daydate = weekdays(timestamp),
-         tempdate = timestamp + 8*60*60,
+         tempdate = timestamp + (8*60*60),
          weekend = chron::is.weekend(tempdate),
          time = format(time60, format = "%H:%M"),
          date = format(timestamp, format = "%m/%d/%Y")) %>%
   select(-c(tempdate)) %>%
   group_by(location, date) %>%
   add_count(location, date, name = "count")
+```
 
+```{r}
 heatmap_cc_weekday <- heatmap_cc %>%
   filter(weekend == FALSE)
+```
 
+```{r}
 heatmap_cc_weekend <- heatmap_cc %>%
   filter(weekend == TRUE)
+```
 
-x1 <- length(unique(heatmap_cc_weekday$count))
+```{r}
+HeatMap_WD <- length(unique(heatmap_cc_weekday$count))
+```
 
-cc_colours1 <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(x1)
+```{r}
+cc_colours2 <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(HeatMap_WD)
+```
 
-p3 <- ggplot(heatmap_cc_weekday,
-       aes(location, date)) + 
-  geom_tile(aes(fill = factor(count))) + 
-  scale_fill_manual(values = cc_colours1,
-                    name = "Frequency") +
-                    #breaks = levels(count)[seq(1, x, by = 5)]) +
-  labs(x = "Locations", y = "Date", title = "Number of CC Transactions during Weekdays") +
-  theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1),
-        axis.text.y = element_text(size = 7),
-        plot.title = element_text(hjust = 0.5))
-
-#svl <- "CC Weekday Heatmap.png"
-#ggsave(svl)
-
-x2 <- length(unique(heatmap_cc_weekend$count))
-
-cc_colours2 <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(x2)
-
-p4 <- ggplot(heatmap_cc_weekend,
-       aes(location, date)) + 
-  geom_tile(aes(fill = factor(count))) + 
-  scale_fill_manual(values = cc_colours2,
-                    name = "Frequency") + 
-                    #breaks = levels(count)[seq(1, x, by = 5)]) +
-  labs(x = "Locations", y = "Date", title = "Number of CC Transactions during Weekends") +
-  theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1),
-        axis.text.y = element_text(size = 7),
-        plot.title = element_text(hjust = 0.5))
-
-#svl <- "CC Weekend Heatmap.png"
-#ggsave(svl)
-heatmap_loy <- loyalty_data %>%
+2) Using Loyalty Data - for both day and time.
+```{r}
+heatmap_loyalty <- loyalty_data %>%
   mutate(daydate = weekdays(timestamp),
          tempdate = timestamp + 8*60*60,
          weekend = chron::is.weekend(tempdate),
@@ -377,50 +372,30 @@ heatmap_loy <- loyalty_data %>%
   select(-c(tempdate)) %>%
   group_by(location, date) %>%
   add_count(location, date, name = "count")
+```
 
-heatmap_loy_weekday <- heatmap_loy %>%
+```{r}
+heatmap_loyalty_weekday <- heatmap_loyalty %>%
   filter(weekend == FALSE)
+```
 
-heatmap_loy_weekend <- heatmap_loy %>%
+```{r}
+heatmap_loyalty_weekend <- heatmap_loyalty %>%
   filter(weekend == TRUE)
+```
 
-x1 <- length(unique(heatmap_loy_weekday$count))
+```{r}
+L1 <- length(unique(heatmap_loyalty_weekday$count))
+```
 
-cc_colours1 <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(x1)
 
-p5 <- ggplot(heatmap_loy_weekday,
-       aes(location, date)) + 
-  geom_tile(aes(fill = factor(count))) + 
-  scale_fill_manual(values = cc_colours1,
-                    name = "Frequency") +
-                    #breaks = levels(count)[seq(1, x, by = 5)]) +
-  labs(x = "Locations", y = "Date", title = "Loyalty Card Transactions during Weekdays") +
-  theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1),
-        axis.text.y = element_text(size = 7),
-        plot.title = element_text(hjust = 0.5))
 
-#svl <- "Loyalty Weekday Heatmap.png"
-#ggsave(svl)
-
-x2 <- length(unique(heatmap_loy_weekend$count))
-
-cc_colours2 <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(x2)
-
-p6 <- ggplot(heatmap_loy_weekend,
-       aes(location, date)) + 
-  geom_tile(aes(fill = factor(count))) + 
-  scale_fill_manual(values = cc_colours2,
-                    name = "Frequency") + 
-                    #breaks = levels(count)[seq(1, x, by = 5)]) +
-  labs(x = "Locations", y = "Date", title = "Loyalty Card Transactions during Weekends") +
-  theme(axis.text.x = element_text(size = 8, angle = 45, vjust = 1.1, hjust = 1.1),
-        axis.text.y = element_text(size = 7),
-        plot.title = element_text(hjust = 0.5))
-
-#svl <- "Loyalty Weekend Heatmap.png"
-#ggsave(svl)
 ____________________________________________________________________________________________________________________
 ### 2. Add the vehicle data to your analysis of the credit and loyalty card data. How does your assessment of the anomalies in question 1 change based on this new data? What discrepancies between vehicle, credit, and loyalty card data do you find? Please limit your answer to 8 images and 500 words.
+
+The Gps and Employee Car data is already added to our RStudio.
+
+
 
 ________________________________________________________________________________________________________________
 ### 3. Can you infer the owners of each credit card and loyalty card? What is your evidence? Where are there uncertainties in your method? Where are there uncertainties in the data? Please limit your answer to 8 images and 500 words.
@@ -438,10 +413,32 @@ Abila_st <- st_read(dsn = "data/MC2/Geospatial",
                     layer = "Abila")
 ```
 
-```{r}
+```{r echo=TRUE}
 gps <- read_csv("data/MC2/gps.csv")
 glimpse(gps)
 ```
+
+```{r}
+bgmap <- raster("data/MC2-tourist.tif")
+bgmap
+```
+
+```{r}
+tmap_mode("plot")
+tm_shape(bgmap)+
+  tm_raster(bgmap,
+            legend.show = FALSE)
+```
+
+```{r}
+tm_shape(bgmap) +
+tm_rgb(bgmap, r = 1, g = 2, b = 3,
+        alpha = NA,
+        saturation = 1,
+        interpolate = TRUE,
+        max.value = 255)
+```
+
 ____________________________________________________________________________________________________________________
 ### 6. References and Accolades:
 1. http://www.vacommunity.org/tiki-download_wiki_attachment.php?attId=23: 
@@ -452,7 +449,8 @@ Stackoverflow provided me with lot of insights as to how to use some of the code
 
 3. https://scholarworks.smith.edu/cgi/viewcontent.cgi?article=1088&context=csc_facpubs
 
-4. 
+4. https://www.datanovia.com/en/lessons/heatmap-in-r-static-and-interactive-visualization/
+This helped me code the heatmap to a large extent even though I could not replicate an accurate version.
 
 
 
