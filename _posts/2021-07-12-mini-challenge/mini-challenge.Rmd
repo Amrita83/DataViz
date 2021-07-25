@@ -51,7 +51,8 @@ packages = c('tidytext', 'widyr',
               'tmap', 'clock',
               'plotly', 'ggplot2',
               'readr', 'readxl',
-              'network')
+              'network', 'readr',
+              'readxl', 'tiff')
 
 for(p in packages){
   if(!require(p, character.only = T)){
@@ -145,6 +146,8 @@ cc_data %>%
   count(location, sort = TRUE)
 ```
 ....................................................................................................................
+
+
 *Analysis:*
 
 1) Based on the credit card transactions, *Katerina's Cafe, Hippokampos, Guy's Gyros and Brew've Been Served* are popular locations which were frequented by the GASTECH employees.
@@ -254,7 +257,7 @@ WD <- length(unique(heatmap_cc_weekday$count))
 cc_colour_A <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(WD)
 ```
 
-```{r}
+```{r echo=TRUE}
 C1 <- ggplot(heatmap_cc_weekday,
        aes(location, time)) + 
   geom_tile(aes(fill = factor(count))) + 
@@ -267,15 +270,15 @@ C1 <- ggplot(heatmap_cc_weekday,
         plot.title = element_text(hjust = 0.5))
 ```
 
-```{r}
+```{r echo=TRUE}
 A1 <- length(unique(count_heatmap_cc_weekday$count))
 ```
 
-```{r}
+```{r echo=TRUE}
 C2 <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(A1)
 ```
 
-```{r}
+```{r echo=TRUE}
 C3 <- ggplot(count_heatmap_cc_weekday,
        aes(location, time)) + 
   geom_tile(aes(fill = factor(count))) + 
@@ -289,15 +292,15 @@ C3 <- ggplot(count_heatmap_cc_weekday,
 ```
 
 
-```{r}
+```{r echo=TRUE}
 WE <- length(unique(heatmap_cc_weekend$count))
 ```
 
-```{r}
+```{r echo=TRUE}
 cc_colour_B <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(WE)
 ```
 
-```{r}
+```{r echo=TRUE}
 A2 <- ggplot(heatmap_cc_weekend,
        aes(location, time)) + 
   geom_tile(aes(fill = factor(count))) + 
@@ -310,15 +313,15 @@ A2 <- ggplot(heatmap_cc_weekend,
         plot.title = element_text(hjust = 0.5))
 ```
 
-```{r}
+```{r echo=TRUE}
 WE_A <- length(unique(count_heatmap_cc_weekend$count))
 ```
 
-```{r}
+```{r echo=TRUE}
 cc_colours2a <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(WE_A)
 ```
 
-```{r}
+```{r echo=TRUE}
 CC_WKND <- ggplot(count_heatmap_cc_weekend,
        aes(location, time)) + 
   geom_tile(aes(fill = factor(count))) + 
@@ -331,7 +334,7 @@ CC_WKND <- ggplot(count_heatmap_cc_weekend,
         plot.title = element_text(hjust = 0.5))
 ```
 
-```{r}
+```{r echo=TRUE}
 heatmap_cc <- cc_data %>%
   mutate(time60 = round_date(cc_data$timestamp, "60 minutes"),
          daydate = weekdays(timestamp),
@@ -344,26 +347,26 @@ heatmap_cc <- cc_data %>%
   add_count(location, date, name = "count")
 ```
 
-```{r}
+```{r echo=TRUE}
 heatmap_cc_weekday <- heatmap_cc %>%
   filter(weekend == FALSE)
 ```
 
-```{r}
+```{r echo=TRUE}
 heatmap_cc_weekend <- heatmap_cc %>%
   filter(weekend == TRUE)
 ```
 
-```{r}
+```{r echo=TRUE}
 HeatMap_WD <- length(unique(heatmap_cc_weekday$count))
 ```
 
-```{r}
+```{r echo=TRUE}
 cc_colours2 <- colorRampPalette(c('blue', 'green', 'yellow', 'red'))(HeatMap_WD)
 ```
 
 2) Using Loyalty Data - for both day and time.
-```{r}
+```{r echo=TRUE}
 heatmap_loyalty <- loyalty_data %>%
   mutate(daydate = weekdays(timestamp),
          tempdate = timestamp + 8*60*60,
@@ -374,17 +377,17 @@ heatmap_loyalty <- loyalty_data %>%
   add_count(location, date, name = "count")
 ```
 
-```{r}
+```{r echo=TRUE}
 heatmap_loyalty_weekday <- heatmap_loyalty %>%
   filter(weekend == FALSE)
 ```
 
-```{r}
+```{r echo=TRUE}
 heatmap_loyalty_weekend <- heatmap_loyalty %>%
   filter(weekend == TRUE)
 ```
 
-```{r}
+```{r echo=TRUE}
 L1 <- length(unique(heatmap_loyalty_weekday$count))
 ```
 
@@ -418,19 +421,14 @@ gps <- read_csv("data/MC2/gps.csv")
 glimpse(gps)
 ```
 
-```{r}
-bgmap <- raster("data/MC2-tourist.tif")
-bgmap
-```
-
-```{r}
+```{r echo=TRUE}
 tmap_mode("plot")
 tm_shape(bgmap)+
   tm_raster(bgmap,
             legend.show = FALSE)
 ```
 
-```{r}
+```{r echo=TRUE}
 tm_shape(bgmap) +
 tm_rgb(bgmap, r = 1, g = 2, b = 3,
         alpha = NA,
@@ -438,6 +436,7 @@ tm_rgb(bgmap, r = 1, g = 2, b = 3,
         interpolate = TRUE,
         max.value = 255)
 ```
+
 
 ____________________________________________________________________________________________________________________
 ### 6. References and Accolades:
